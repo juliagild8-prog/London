@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>London Explorer — Cool Things To Do</title>
+  <style>
+    :root{
+      --bg:#0b1020; --panel:#0f1733; --panel2:#101a3a; --text:#e8ecff; --muted:#aab3da;
+      --line:rgba(255,255,255,.10); --chip:rgba(255,255,255,.08); --chip2:rgba(255,255,255,.12);
+      --ok:#4ee7a8; --warn:#ffd36b; --bad:#ff6b8a;
+      --shadow: 0 18px 40px rgba(0,0,0,.35);
+      --r:18px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:var(--font); color:var(--text);
+      background: radial-gradient(1200px 700px at 20% -10%, rgba(78,231,168,.18), transparent 55%),
+                  radial-gradient(1000px 700px at 95% 0%, rgba(255,107,138,.18), transparent 55%),
+                  radial-gradient(900px 800px at 40% 120%, rgba(120,160,255,.16), transparent 55%),
+                  var(--bg);
+    }
+    a{color:inherit}
+    .wrap{max-width:1200px; margin:0 auto; padding:26px 18px 42px}
+    header{
+      display:flex; gap:14px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+    .title{
+      display:flex; flex-direction:column; gap:6px;
+    }
+    h1{margin:0; font-size:28px; letter-spacing:.2px}
+    .sub{color:var(--muted); max-width:56ch; line-height:1.35}
+    .meta{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+      background:rgba(255,255,255,.05); border:1px solid var(--line);
+      padding:10px 12px; border-radius:999px;
+    }
+    .pill{display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-size:13px}
+    .dot{width:8px; height:8px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 3px rgba(78,231,168,.15)}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:16px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+    }
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .panel .inner{padding:14px}
+    .controls{
+      display:grid;
+      grid-template-columns: 1.25fr .9fr .9fr .7fr;
+      gap:10px;
+    }
+    @media (max-width: 980px){
+      .controls{grid-template-columns: 1fr 1fr}
+    }
+    @media (max-width: 560px){
+      .controls{grid-template-columns:1fr}
+    }
+    .field{
+      display:flex; flex-direction:column; gap:6px;
+    }
+    label{font-size:12px; color:var(--muted)}
+    input, select{
+      width:100%;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      outline:none;
+    }
+    input:focus, select:focus{border-color: rgba(78,231,168,.45); box-shadow:0 0 0 4px rgba(78,231,168,.12)}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .chip{
+      cursor:pointer;
+      user-select:none;
+      background:var(--chip);
+      border:1px solid var(--line);
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:13px;
+      display:inline-flex; align-items:center; gap:8px;
+      transition:.15s transform, .15s background, .15s color, .15s border-color;
+    }
+    .chip:hover{transform:translateY(-1px); background:var(--chip2); color:var(--text)}
+    .chip.active{background:rgba(78,231,168,.14); border-color:rgba(78,231,168,.35); color:var(--text)}
+    .chip small{opacity:.9; color:var(--muted)}
+    .toolbar{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      padding:10px 14px;
+      border-top:1px solid var(--line);
+      background:rgba(0,0,0,.10);
+      flex-wrap:wrap;
+    }
+    .btn{
+      cursor:pointer;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:9px 11px;
+      border-radius:12px;
+      font-size:13px;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{background:rgba(255,255,255,.10)}
+    .btn.primary{
+      background:rgba(78,231,168,.16);
+      border-color:rgba(78,231,168,.35);
+    }
+    .btn.danger{
+      background:rgba(255,107,138,.14);
+      border-color:rgba(255,107,138,.35);
+    }
+    .count{color:var(--muted); font-size:13px}
+    .cards{
+      padding:14px;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px;
+    }
+    @media (max-width: 700px){
+      .cards{grid-template-columns:1fr}
+    }
+    .card{
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--line);
+      border-radius:16px;
+      overflow:hidden;
+      display:flex; flex-direction:column;
+      min-height:150px;
+    }
+    .cardTop{
+      padding:12px 12px 10px;
+      display:flex; justify-content:space-between; gap:10px;
+    }
+    .card h3{margin:0; font-size:16px; line-height:1.25}
+    .card p{margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.35}
+    .badges{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
+    .badge{
+      font-size:12px; color:var(--muted);
+      padding:5px 8px; border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.12);
+    }
+    .badge.good{border-color:rgba(78,231,168,.25); background:rgba(78,231,168,.10)}
+    .badge.warn{border-color:rgba(255,211,107,.25); background:rgba(255,211,107,.10)}
+    .badge.kind{border-color:rgba(120,160,255,.25); background:rgba(120,160,255,.10)}
+    .cardBot{
+      margin-top:auto;
+      padding:10px 12px 12px;
+      border-top:1px solid var(--line);
+      display:flex; gap:8px; justify-content:space-between; align-items:center;
+      background:rgba(0,0,0,.10);
+    }
+    .actions{display:flex; gap:8px; flex-wrap:wrap}
+    .link{
+      color:var(--text);
+      text-decoration:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      padding:8px 10px;
+      border-radius:12px;
+      font-size:13px;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .link:hover{background:rgba(255,255,255,.10)}
+    .fav{
+      cursor:pointer;
+      width:36px; height:36px;
+      border-radius:12px;
+      display:grid; place-items:center;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+    }
+    .fav.active{background:rgba(255,211,107,.14); border-color:rgba(255,211,107,.35)}
+    .sideHead{
+      padding:14px;
+      border-bottom:1px solid var(--line);
+      background:rgba(0,0,0,.10);
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .sideHead h2{margin:0; font-size:16px}
+    .sideHead .mini{color:var(--muted); font-size:12px}
+    .sideBody{padding:14px}
+    .list{display:flex; flex-direction:column; gap:10px}
+    .item{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      border-radius:14px;
+      padding:10px;
+      display:flex; justify-content:space-between; gap:10px; align-items:flex-start;
+    }
+    .item b{display:block; font-size:13px; line-height:1.25}
+    .item span{display:block; font-size:12px; color:var(--muted); margin-top:4px}
+    .x{
+      cursor:pointer;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      width:30px; height:30px; border-radius:10px;
+      display:grid; place-items:center;
+      flex:0 0 auto;
+    }
+    .empty{color:var(--muted); font-size:13px; line-height:1.4}
+    .footerNote{margin-top:12px; color:var(--muted); font-size:12px; line-height:1.4}
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size:12px; padding:2px 6px; border:1px solid var(--line); border-radius:8px;
+      background:rgba(0,0,0,.18); color:var(--text);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <h1>London Explorer</h1>
+        <div class="sub">
+          Search, filter, and save a London-only list of cool places to see and do.
+          (Starter dataset included — add your own in the code.)
+        </div>
+      </div>
+      <div class="meta">
+        <div class="pill"><span class="dot"></span> London-only directory</div>
+        <div class="pill">Tips: <span class="kbd">/</span> focuses search · <span class="kbd">f</span> toggles favorites view</div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Main panel -->
+      <section class="panel" aria-label="Places">
+        <div class="inner">
+          <div class="controls">
+            <div class="field">
+              <label for="q">Search</label>
+              <input id="q" placeholder="Try: cemetery, Soho, neon, Roman, market…" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label for="neighborhood">Area</label>
+              <select id="neighborhood">
+                <option value="">All areas</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="kind">Type</label>
+              <select id="kind">
+                <option value="">All types</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sort">Sort</label>
+              <select id="sort">
+                <option value="recommended">Recommended</option>
+                <option value="name">Name (A→Z)</option>
+                <option value="free">Free-first</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="chips" id="chips"></div>
+        </div>
+
+        <div class="toolbar">
+          <div class="count" id="count">—</div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap">
+            <button class="btn" id="toggleFavs" title="Show only favorites (shortcut: f)">⭐ Favorites</button>
+            <button class="btn" id="clearFilters">Reset filters</button>
+            <button class="btn primary" id="exportItin">Export itinerary</button>
+          </div>
+        </div>
+
+        <div class="cards" id="cards"></div>
+      </section>
+
+      <!-- Side panel -->
+      <aside class="panel" aria-label="Itinerary">
+        <div class="sideHead">
+          <div>
+            <h2>My Itinerary</h2>
+            <div class="mini" id="itinMeta">0 saved</div>
+          </div>
+          <button class="btn danger" id="clearItin">Clear</button>
+        </div>
+        <div class="sideBody">
+          <div class="list" id="itin"></div>
+          <div class="footerNote">
+            Pro tip: Use this as your “shortlist,” then click <b>Map</b> to cluster stops by area.
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+<script>
+/**
+ * London Explorer — single-file app
+ * - No external libs
+ * - Data lives in PLACES
+ * - Favorites + itinerary stored in localStorage
+ */
+
+const PLACES = [
+  // Starter list (mix of unusual + iconic-adjacent). Add as many as you want.
+  // Fields: id, name, area, kind, tags[], blurb, free (true/false/unknown), time ("Quick"|"1–2h"|"Half-day"), mapQuery
+  {id:"leadenhall", name:"Leadenhall Market", area:"City of London", kind:"Architecture & Streets", tags:["historic","market","photos"], blurb:"Victorian covered market with serious Harry-Potter vibes and gorgeous ironwork.", free:true, time:"Quick", mapQuery:"Leadenhall Market"},
+  {id:"highgate", name:"Highgate Cemetery", area:"Highgate", kind:"Cemeteries & Curiosities", tags:["gothic","history","walking"], blurb:"Atmospheric Victorian cemetery—one of London’s most iconic, overgrown, story-filled strolls.", free:false, time:"1–2h", mapQuery:"Highgate Cemetery"},
+  {id:"stdunstan", name:"St Dunstan-in-the-East (Ruins Garden)", area:"City of London", kind:"Parks & Gardens", tags:["ruins","quiet","photos"], blurb:"A bombed-out church turned into an enchanting pocket garden.", free:true, time:"Quick", mapQuery:"St Dunstan in the East"},
+  {id:"godsjunkyard", name:"God’s Own Junkyard", area:"Walthamstow", kind:"Art & Design", tags:["neon","colorful","warehouse"], blurb:"A kaleidoscopic maze of neon signs—pure dopamine for your camera roll.", free:"unknown", time:"1–2h", mapQuery:"God's Own Junkyard"},
+  {id:"twinings", name:"Twinings Tea Shop", area:"City of London", kind:"Food & Drink", tags:["tea","historic","shopping"], blurb:"A tiny, centuries-old tea shop that feels like stepping into London’s tea history.", free:true, time:"Quick", mapQuery:"Twinings Tea Shop London"},
+  {id:"viktorwynd", name:"The Viktor Wynd Museum of Curiosities", area:"Hackney", kind:"Museums & Collections", tags:["oddities","cabinet-of-curiosities","night"], blurb:"Modern cabinet of curiosities: art, natural history, and wonderfully weird displays.", free:false, time:"1–2h", mapQuery:"Viktor Wynd Museum"},
+  {id:"sohonoses", name:"The Seven Noses of Soho", area:"Soho", kind:"Street Art & Hidden Finds", tags:["scavenger-hunt","quirky","walk"], blurb:"A cheeky scavenger hunt: hidden noses stuck on walls around Soho.", free:true, time:"Quick", mapQuery:"Seven Noses of Soho"},
+  {id:"mithras", name:"Temple of Mithras", area:"City of London", kind:"History & Ruins", tags:["roman","underground","ancient"], blurb:"Reconstructed Roman temple remains tucked beneath modern London.", free:true, time:"1–2h", mapQuery:"London Mithraeum"},
+  {id:"guildhallamp", name:"Guildhall’s Underground Roman Amphitheater", area:"City of London", kind:"History & Ruins", tags:["roman","underground","quick"], blurb:"A Roman amphitheater outline hiding under Guildhall Yard—surprisingly cool.", free:true, time:"Quick", mapQuery:"Guildhall Roman Amphitheatre"},
+  {id:"noveltyauto", name:"Novelty Automation", area:"Holborn", kind:"Games & Experiences", tags:["arcade","satire","indoor"], blurb:"Satirical arcade machines that feel like Black Mirror… but funny.", free:false, time:"1–2h", mapQuery:"Novelty Automation London"},
+  {id:"cecillcourt", name:"Cecil Court", area:"Covent Garden", kind:"Architecture & Streets", tags:["bookshops","antiques","walk"], blurb:"A charming alley lined with secondhand bookstores and antiquarian shops.", free:true, time:"Quick", mapQuery:"Cecil Court London"},
+  {id:"skygarden", name:"Sky Garden", area:"City of London", kind:"Views & Landmarks", tags:["views","sunset","reservations"], blurb:"Indoor garden with panoramic views—book ahead for prime sunset vibes.", free:true, time:"1–2h", mapQuery:"Sky Garden London"},
+  {id:"columbia", name:"Columbia Road Flower Market", area:"Bethnal Green", kind:"Markets", tags:["flowers","sunday","photos"], blurb:"Loud, lively, and photogenic—perfect if you’re in London on a Sunday morning.", free:true, time:"1–2h", mapQuery:"Columbia Road Flower Market"},
+  {id:"regentscanal", name:"Regent’s Canal Walk (Little Venice → Camden)", area:"West & North London", kind:"Walks", tags:["walk","canal","coffee"], blurb:"A scenic canal walk that strings together neighborhoods with minimal traffic stress.", free:true, time:"Half-day", mapQuery:"Little Venice London"},
+  {id:"bricklane", name:"Brick Lane & Spitalfields", area:"Shoreditch", kind:"Food & Drink", tags:["street-food","markets","art"], blurb:"Street food + vintage + graffiti—easy to make this an entire afternoon.", free:true, time:"Half-day", mapQuery:"Brick Lane London"},
+  {id:"boromarket", name:"Borough Market", area:"Southwark", kind:"Food & Drink", tags:["foodie","market","busy"], blurb:"Legendary food market: come hungry and pace yourself.", free:true, time:"1–2h", mapQuery:"Borough Market"},
+  {id:"greenwich", name:"Greenwich Park & Observatory Area", area:"Greenwich", kind:"Parks & Gardens", tags:["views","history","boat"], blurb:"Green views + maritime history + easy Thames vibes.", free:true, time:"Half-day", mapQuery:"Greenwich Park"},
+  {id:"camdenlocks", name:"Camden Market & Locks", area:"Camden", kind:"Markets", tags:["shopping","street-food","crowds"], blurb:"If you like chaotic fun: stalls, food, music, and people-watching.", free:true, time:"Half-day", mapQuery:"Camden Market"},
+  {id:"hampsteadheath", name:"Hampstead Heath (Parliament Hill View)", area:"Hampstead", kind:"Parks & Gardens", tags:["views","picnic","sunset"], blurb:"Big nature energy in the city; Parliament Hill has one of the best skyline views.", free:true, time:"Half-day", mapQuery:"Parliament Hill"},
+  {id:"southbank", name:"South Bank Walk (Waterloo → Tower Bridge)", area:"South Bank", kind:"Walks", tags:["river","night","views"], blurb:"Classic riverside walk with nonstop sights, snacks, and skyline moments.", free:true, time:"Half-day", mapQuery:"South Bank London"}
+];
+
+// ---- configuration / derived data ----
+const TAGS = [
+  {key:"unusual", label:"Unusual", hint:"weird/hidden energy"},
+  {key:"historic", label:"History", hint:"past + stories"},
+  {key:"views", label:"Views", hint:"skyline moments"},
+  {key:"foodie", label:"Food", hint:"eat-first planning"},
+  {key:"walk", label:"Walkable", hint:"great on foot"},
+  {key:"indoor", label:"Indoor", hint:"rain-proof"},
+  {key:"photos", label:"Photo Spots", hint:"camera candy"}
+];
+
+const LS = {
+  favs: "londonExplorer.favs.v1",
+  itin: "londonExplorer.itin.v1"
+};
+
+const els = {
+  q: document.getElementById("q"),
+  neighborhood: document.getElementById("neighborhood"),
+  kind: document.getElementById("kind"),
+  sort: document.getElementById("sort"),
+  chips: document.getElementById("chips"),
+  cards: document.getElementById("cards"),
+  count: document.getElementById("count"),
+  toggleFavs: document.getElementById("toggleFavs"),
+  clearFilters: document.getElementById("clearFilters"),
+  itin: document.getElementById("itin"),
+  itinMeta: document.getElementById("itinMeta"),
+  clearItin: document.getElementById("clearItin"),
+  exportItin: document.getElementById("exportItin")
+};
+
+let state = {
+  tag: "",
+  onlyFavs: false,
+  favs: new Set(loadJson(LS.favs, [])),
+  itin: loadJson(LS.itin, []) // array of ids
+};
+
+function loadJson(key, fallback){
+  try{
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  }catch{ return fallback; }
+}
+function save(){
+  localStorage.setItem(LS.favs, JSON.stringify([...state.favs]));
+  localStorage.setItem(LS.itin, JSON.stringify(state.itin));
+}
+function uniq(arr){ return [...new Set(arr)].filter(Boolean).sort((a,b)=>a.localeCompare(b)); }
+
+// ---- init dropdowns ----
+function initFilters(){
+  const areas = uniq(PLACES.map(p=>p.area));
+  const kinds = uniq(PLACES.map(p=>p.kind));
+
+  for(const a of areas){
+    const opt = document.createElement("option");
+    opt.value = a; opt.textContent = a;
+    els.neighborhood.appendChild(opt);
+  }
+  for(const k of kinds){
+    const opt = document.createElement("option");
+    opt.value = k; opt.textContent = k;
+    els.kind.appendChild(opt);
+  }
+}
+
+// ---- chips ----
+function initChips(){
+  TAGS.forEach(t=>{
+    const el = document.createElement("div");
+    el.className = "chip";
+    el.dataset.key = t.key;
+    el.innerHTML = `<span>${t.label}</span> <small>${t.hint}</small>`;
+    el.addEventListener("click", ()=>{
+      state.tag = (state.tag === t.key) ? "" : t.key;
+      render();
+    });
+    els.chips.appendChild(el);
+  });
+}
+
+// ---- filtering logic ----
+function matches(place){
+  const q = els.q.value.trim().toLowerCase();
+  const area = els.neighborhood.value;
+  const kind = els.kind.value;
+
+  if(area && place.area !== area) return false;
+  if(kind && place.kind !== kind) return false;
+
+  if(state.onlyFavs && !state.favs.has(place.id)) return false;
+
+  if(state.tag){
+    const tags = (place.tags || []).map(x=>String(x).toLowerCase());
+    // A few tags are semantic
+    if(state.tag === "unusual"){
+      const unusualWords = ["oddities","quirky","scavenger-hunt","neon","underground","weird"];
+      if(!tags.some(t=>unusualWords.includes(t))) return false;
+    } else if(state.tag === "historic"){
+      const histWords = ["historic","roman","ancient","history","victorian","ruins"];
+      if(!tags.some(t=>histWords.includes(t))) return false;
+    } else if(state.tag === "views"){
+      if(!tags.includes("views")) return false;
+    } else if(state.tag === "foodie"){
+      const foodWords = ["foodie","street-food","tea","market"];
+      if(!tags.some(t=>foodWords.includes(t))) return false;
+    } else if(state.tag === "walk"){
+      if(!tags.includes("walk") && place.kind !== "Walks") return false;
+    } else if(state.tag === "indoor"){
+      if(!tags.includes("indoor") && place.kind !== "Museums & Collections" && place.kind !== "Games & Experiences") return false;
+    } else if(state.tag === "photos"){
+      if(!tags.includes("photos")) return false;
+    }
+  }
+
+  if(q){
+    const hay = `${place.name} ${place.area} ${place.kind} ${(place.tags||[]).join(" ")} ${place.blurb}`.toLowerCase();
+    if(!hay.includes(q)) return false;
+  }
+  return true;
+}
+
+function sortPlaces(list){
+  const mode = els.sort.value;
+  const copy = [...list];
+  if(mode === "name"){
+    copy.sort((a,b)=>a.name.localeCompare(b.name));
+  } else if(mode === "free"){
+    const scoreFree = v => (v === true ? 0 : (v === "unknown" ? 1 : 2));
+    copy.sort((a,b)=> scoreFree(a.free)-scoreFree(b.free) || a.name.localeCompare(b.name));
+  } else {
+    // recommended: favorites first, then quicker wins, then name
+    const favScore = p => state.favs.has(p.id) ? 0 : 1;
+    const timeScore = p => (p.time==="Quick"?0:(p.time==="1–2h"?1:2));
+    copy.sort((a,b)=> favScore(a)-favScore(b) || timeScore(a)-timeScore(b) || a.name.localeCompare(b.name));
+  }
+  return copy;
+}
+
+// ---- rendering ----
+function render(){
+  // chips active state
+  [...els.chips.children].forEach(ch=>{
+    ch.classList.toggle("active", ch.dataset.key === state.tag);
+  });
+  els.toggleFavs.classList.toggle("primary", state.onlyFavs);
+
+  const filtered = sortPlaces(PLACES.filter(matches));
+  els.count.textContent = `${filtered.length} place${filtered.length===1?"":"s"} shown`;
+
+  els.cards.innerHTML = "";
+  if(filtered.length === 0){
+    const div = document.createElement("div");
+    div.className = "empty";
+    div.textContent = "No matches. Try clearing filters or searching a broader keyword.";
+    els.cards.appendChild(div);
+  } else {
+    filtered.forEach(p=> els.cards.appendChild(placeCard(p)));
+  }
+
+  renderItinerary();
+  save();
+}
+
+function badge(text, cls){
+  const b = document.createElement("span");
+  b.className = `badge ${cls||""}`.trim();
+  b.textContent = text;
+  return b;
+}
+
+function placeCard(p){
+  const card = document.createElement("div");
+  card.className = "card";
+
+  const top = document.createElement("div");
+  top.className = "cardTop";
+
+  const left = document.createElement("div");
+  const h = document.createElement("h3");
+  h.textContent = p.name;
+
+  const desc = document.createElement("p");
+  desc.textContent = p.blurb;
+
+  const badges = document.createElement("div");
+  badges.className = "badges";
+  badges.appendChild(badge(p.area, "kind"));
+  badges.appendChild(badge(p.kind, "kind"));
+
+  const freeLabel = p.free === true ? "Free" : (p.free === false ? "Paid" : "Cost varies");
+  badges.appendChild(badge(freeLabel, p.free === true ? "good" : (p.free === false ? "warn" : "")));
+  badges.appendChild(badge(p.time || "—", ""));
+
+  left.appendChild(h);
+  left.appendChild(desc);
+  left.appendChild(badges);
+
+  const fav = document.createElement("div");
+  fav.className = "fav";
+  fav.title = "Favorite";
+  fav.innerHTML = state.favs.has(p.id) ? "★" : "☆";
+  fav.classList.toggle("active", state.favs.has(p.id));
+  fav.addEventListener("click", ()=>{
+    if(state.favs.has(p.id)) state.favs.delete(p.id);
+    else state.favs.add(p.id);
+    render();
+  });
+
+  top.appendChild(left);
+  top.appendChild(fav);
+
+  const bot = document.createElement("div");
+  bot.className = "cardBot";
+
+  const actions = document.createElement("div");
+  actions.className = "actions";
+
+  const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.mapQuery || (p.name + ", London"))}`;
+  const map = document.createElement("a");
+  map.className = "link";
+  map.href = mapUrl;
+  map.target = "_blank";
+  map.rel = "noopener";
+  map.textContent = "Map";
+
+  const add = document.createElement("button");
+  add.className = "btn";
+  add.textContent = state.itin.includes(p.id) ? "✓ In itinerary" : "+ Add";
+  add.disabled = state.itin.includes(p.id);
+  add.addEventListener("click", ()=>{
+    if(!state.itin.includes(p.id)){
+      state.itin.push(p.id);
+      render();
+    }
+  });
+
+  actions.appendChild(map);
+  actions.appendChild(add);
+
+  const rightNote = document.createElement("div");
+  rightNote.className = "count";
+  rightNote.textContent = (p.tags && p.tags.length) ? `Tags: ${p.tags.slice(0,3).join(", ")}` : "";
+
+  bot.appendChild(actions);
+  bot.appendChild(rightNote);
+
+  card.appendChild(top);
+  card.appendChild(bot);
+  return card;
+}
+
+function renderItinerary(){
+  els.itin.innerHTML = "";
+  const items = state.itin.map(id => PLACES.find(p=>p.id===id)).filter(Boolean);
+
+  els.itinMeta.textContent = `${items.length} saved`;
+
+  if(items.length === 0){
+    const div = document.createElement("div");
+    div.className = "empty";
+    div.textContent = "Add places from the cards to build your shortlist.";
+    els.itin.appendChild(div);
+    return;
+  }
+
+  items.forEach(p=>{
+    const row = document.createElement("div");
+    row.className = "item";
+
+    const left = document.createElement("div");
+    const b = document.createElement("b");
+    b.textContent = p.name;
+    const s = document.createElement("span");
+    s.textContent = `${p.area} • ${p.kind}`;
+    left.appendChild(b);
+    left.appendChild(s);
+
+    const x = document.createElement("div");
+    x.className = "x";
+    x.title = "Remove";
+    x.textContent = "×";
+    x.addEventListener("click", ()=>{
+      state.itin = state.itin.filter(id => id !== p.id);
+      render();
+    });
+
+    row.appendChild(left);
+    row.appendChild(x);
+    els.itin.appendChild(row);
+  });
+}
+
+// ---- events ----
+els.q.addEventListener("input", render);
+els.neighborhood.addEventListener("change", render);
+els.kind.addEventListener("change", render);
+els.sort.addEventListener("change", render);
+
+els.toggleFavs.addEventListener("click", ()=>{
+  state.onlyFavs = !state.onlyFavs;
+  render();
+});
+
+els.clearFilters.addEventListener("click", ()=>{
+  els.q.value = "";
+  els.neighborhood.value = "";
+  els.kind.value = "";
+  els.sort.value = "recommended";
+  state.tag = "";
+  state.onlyFavs = false;
+  render();
+});
+
+els.clearItin.addEventListener("click", ()=>{
+  state.itin = [];
+  render();
+});
+
+els.exportItin.addEventListener("click", ()=>{
+  const items = state.itin.map(id => PLACES.find(p=>p.id===id)).filter(Boolean);
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    city: "London",
+    count: items.length,
+    itinerary: items
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "london-itinerary.json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+});
+
+// keyboard shortcuts
+document.addEventListener("keydown", (e)=>{
+  if(e.key === "/" && document.activeElement !== els.q){
+    e.preventDefault();
+    els.q.focus();
+  }
+  if(e.key.toLowerCase() === "f" && document.activeElement !== els.q){
+    state.onlyFavs = !state.onlyFavs;
+    render();
+  }
+});
+
+// init
+initFilters();
+initChips();
+render();
+</script>
+</body>
+</html>
