@@ -3,168 +3,141 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>London Trip Planner — Lots of Things To Do</title>
+  <title>London — Neighborhood Planner</title>
   <style>
     :root{
-      --bg:#0b0f17;
-      --card:#0f1624;
-      --text:#e9eefc;
-      --muted:#a9b4d0;
-      --line:rgba(255,255,255,.12);
-      --chip:rgba(255,255,255,.06);
-      --chipOn:rgba(110,168,255,.22);
-      --btn:rgba(255,255,255,.08);
-      --btnOn:rgba(110,168,255,.28);
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius:18px;
+      --bg:#0b0f17; --card:rgba(255,255,255,.04); --line:rgba(255,255,255,.12);
+      --text:#e9eefc; --muted:#a9b4d0; --shadow:0 16px 40px rgba(0,0,0,.45);
+      --accent:rgba(110,168,255,.28); --radius:18px;
     }
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background: radial-gradient(1200px 800px at 20% 10%, rgba(110,168,255,.15), transparent 55%),
-                  radial-gradient(900px 700px at 90% 20%, rgba(255,140,84,.12), transparent 55%),
-                  var(--bg);
       color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(110,168,255,.14), transparent 55%),
+        radial-gradient(1000px 800px at 90% 20%, rgba(255,140,84,.10), transparent 55%),
+        var(--bg);
     }
-    a{ color:inherit; }
-    .wrap{ max-width:1100px; margin:0 auto; padding:24px 16px 64px; }
-    .hero{
-      display:flex; gap:16px; align-items:flex-end; justify-content:space-between;
-      margin-bottom:16px;
-    }
-    h1{ margin:0; font-size:30px; letter-spacing:.2px; }
-    .sub{ margin-top:6px; color:var(--muted); max-width:720px; line-height:1.4; }
+    .wrap{max-width:1200px;margin:0 auto;padding:22px 16px 60px}
+    h1{margin:0;font-size:28px}
+    .sub{margin-top:6px;color:var(--muted);line-height:1.35;max-width:900px}
+    .topbar{display:flex;gap:12px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
+
     .panel{
       border:1px solid var(--line);
       background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
       border-radius: var(--radius);
-      padding:14px;
       box-shadow: var(--shadow);
-      margin-top:14px;
+      padding:14px;
     }
-    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .search{
-      flex:1;
-      min-width:240px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      padding:10px 12px;
-      border-radius:14px;
-      background: rgba(0,0,0,.25);
+      flex:1; min-width:220px;
+      display:flex; gap:10px; align-items:center;
+      padding:10px 12px; border-radius:14px;
       border:1px solid var(--line);
+      background: rgba(0,0,0,.22);
     }
     .search input{
-      width:100%;
-      background:transparent;
-      border:0;
-      outline:none;
-      color:var(--text);
-      font-size:14px;
-    }
-    .chips{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
-    .chip{
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: var(--chip);
-      color: var(--muted);
-      font-size:12px;
-      cursor:pointer;
-      user-select:none;
-      transition: all .12s ease;
-    }
-    .chip.on{
-      background: var(--chipOn);
-      color: var(--text);
-      border-color: rgba(110,168,255,.35);
-    }
-    .metaRow{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:10px;
-      color:var(--muted);
-      font-size:12px;
+      width:100%; border:0; outline:none; background:transparent;
+      color:var(--text); font-size:14px;
     }
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:9px 10px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background: var(--btn);
-      color: var(--text);
-      text-decoration:none;
-      font-size:12px;
-      cursor:pointer;
-      transition: all .12s ease;
-      white-space:nowrap;
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:9px 12px; border-radius:12px;
+      border:1px solid var(--line); background: rgba(255,255,255,.07);
+      color:var(--text); font-size:12px; cursor:pointer; white-space:nowrap;
     }
-    .btn:hover{ background: rgba(255,255,255,.12); }
-    .btn.primary{ background: var(--btnOn); border-color: rgba(110,168,255,.35); }
-    .grid{
-      margin-top:18px;
+    .btn.primary{background: var(--accent); border-color: rgba(110,168,255,.35)}
+    .btn:active{transform: translateY(1px)}
+    .btn[aria-pressed="true"]{background: var(--accent); border-color: rgba(110,168,255,.35)}
+    .meta{color:var(--muted);font-size:12px;margin-top:10px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+    .layout{
+      margin-top:14px;
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      grid-template-columns: 280px 1fr;
+      gap:12px;
+    }
+    @media (max-width: 900px){
+      .layout{grid-template-columns: 1fr}
+    }
+
+    .list{
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.20);
+      border-radius: var(--radius);
+      overflow:hidden;
+    }
+    .listHeader{
+      padding:12px 12px;
+      border-bottom:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      font-weight:650;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .listBody{max-height:70vh; overflow:auto}
+    .neigh{
+      padding:11px 12px;
+      cursor:pointer;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      display:flex; flex-direction:column; gap:4px;
+    }
+    .neigh:hover{background: rgba(255,255,255,.03)}
+    .neigh.active{background: rgba(110,168,255,.14)}
+    .neigh small{color:var(--muted)}
+    .main{
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.20);
+      border-radius: var(--radius);
+      padding:14px;
+    }
+    .mainTop{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      padding-bottom:12px;
+      margin-bottom:12px;
+    }
+    .mainTop h2{margin:0;font-size:18px}
+    .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .badge{
+      font-size:11px;color:var(--muted);
+      padding:6px 8px;border:1px solid var(--line);border-radius:999px;
+      background: rgba(255,255,255,.03);
+    }
+    .items{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap:12px;
     }
     .card{
       border:1px solid var(--line);
-      background: rgba(0,0,0,.22);
-      border-radius: var(--radius);
-      padding:14px;
-      box-shadow: var(--shadow);
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      min-height: 210px;
-    }
-    .cardTop{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .title{
-      font-weight:650;
-      line-height:1.15;
-      margin:0;
-      font-size:16px;
-    }
-    .pill{
-      font-size:11px;
-      padding:6px 9px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      color:var(--muted);
-      background: rgba(255,255,255,.04);
-      white-space:nowrap;
-    }
-    .blurb{ margin:0; color:var(--muted); line-height:1.35; font-size:13px; }
-    .kv{ display:flex; gap:8px; flex-wrap:wrap; }
-    .kv span{
-      font-size:11px;
-      color: var(--muted);
-      padding:6px 8px;
-      border:1px solid var(--line);
-      border-radius:999px;
       background: rgba(255,255,255,.03);
+      border-radius: 16px;
+      padding:12px;
+      display:flex; flex-direction:column; gap:8px;
+      min-height: 170px;
     }
-    .actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:auto; }
+    .card h3{margin:0;font-size:14px;line-height:1.15}
+    .card p{margin:0;color:var(--muted);font-size:12.5px;line-height:1.35}
+    .cardRow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:auto}
+    a{color:inherit}
+    .pill{
+      font-size:11px;padding:6px 8px;border-radius:999px;border:1px solid var(--line);
+      color:var(--muted);background: rgba(255,255,255,.03);
+    }
+    .pill.free{border-color: rgba(110,168,255,.30); background: rgba(110,168,255,.10); color:var(--text)}
+    .pill.paid{border-color: rgba(255,140,84,.30); background: rgba(255,140,84,.08); color:var(--text)}
 
-    /* Modal for 100 ideas */
-    .modal.hidden{ display:none; }
+    /* Modal */
+    .modal.hidden{display:none}
     .modal{
-      position:fixed; inset:0;
+      position:fixed; inset:0; z-index:9999;
       background: rgba(0,0,0,.60);
       display:flex; align-items:center; justify-content:center;
-      padding: 18px;
-      z-index: 9999;
+      padding:18px;
     }
     .modalCard{
       width:min(980px, 100%);
@@ -177,72 +150,85 @@
       box-shadow: var(--shadow);
     }
     .modalHeader{
-      display:flex; align-items:center; justify-content:space-between;
-      gap: 12px;
-      position: sticky;
-      top: 0;
-      background: rgba(10,14,22,.96);
+      position: sticky; top: 0;
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      background: rgba(10,14,22,.98);
       padding-bottom: 10px;
-      border-bottom:1px solid var(--line);
+      border-bottom: 1px solid rgba(255,255,255,.10);
       z-index:1;
     }
-    .modalHeader h3{ margin:0; font-size:16px; }
-    .ideasList{
+    .modalHeader h3{margin:0;font-size:16px}
+    .ideas{
       padding-top:12px;
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 10px;
+      gap:10px;
     }
-    .ideaItem{
-      display:flex; flex-direction:column; gap:8px;
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
+    .idea{
+      border:1px solid var(--line);
       background: rgba(255,255,255,.03);
-      min-height: 86px;
+      border-radius:14px;
+      padding:12px;
+      display:flex; flex-direction:column; gap:8px;
+      min-height: 92px;
     }
-    .ideaItem strong{ font-size:13px; }
-    .small{ font-size:11px; color:var(--muted); line-height:1.25; }
+    .idea strong{font-size:13px}
+    .idea .q{font-size:11px;color:var(--muted);line-height:1.25}
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <div class="hero">
+    <div class="topbar">
       <div>
-        <h1>London Trip Planner</h1>
+        <h1>London — Neighborhood Planner</h1>
         <div class="sub">
-          Filter by category, search by vibe, then open anything in Maps.
-          Each place has a <b>“100 more near here”</b> button to generate lots of nearby ideas automatically.
+          Pick a neighborhood (Covent Garden, Soho, Shoreditch…), then see what’s near it.
+          Want tons more? Click <b>“100 more near here”</b> to generate fresh ideas in Maps.
         </div>
       </div>
-      <div class="row">
-        <button class="btn primary" id="resetBtn">Reset</button>
-      </div>
+      <button class="btn primary" id="resetBtn">Reset</button>
     </div>
 
     <div class="panel">
-      <div class="row">
+      <div class="controls">
         <div class="search">
           <span style="opacity:.8">🔎</span>
-          <input id="q" placeholder="Search: soho, free, views, market, museum, brunch…" />
+          <input id="q" placeholder="Search within this neighborhood: brunch, museum, views, market…" />
         </div>
-
         <button class="btn" id="freeBtn" aria-pressed="false">Free only</button>
-        <button class="btn" id="quickBtn" aria-pressed="false">Quick stops</button>
+        <button class="btn" id="quickBtn" aria-pressed="false">Quick only</button>
+        <button class="btn" id="ideasBtn">100 more near here</button>
       </div>
-
-      <div class="chips" id="chips"></div>
-
-      <div class="metaRow">
-        <div id="count"></div>
-        <div class="row" style="gap:8px">
-          <button class="btn" id="sortBtn">Sort: Recommended</button>
-        </div>
+      <div class="meta">
+        <div id="metaLeft"></div>
+        <div id="metaRight"></div>
       </div>
     </div>
 
-    <div class="grid" id="grid"></div>
+    <div class="layout">
+      <div class="list">
+        <div class="listHeader">
+          <span>Neighborhoods</span>
+          <span id="neighCount" style="color:var(--muted);font-size:12px"></span>
+        </div>
+        <div class="listBody" id="neighList"></div>
+      </div>
+
+      <div class="main">
+        <div class="mainTop">
+          <div>
+            <h2 id="mainTitle">Select a neighborhood</h2>
+            <div class="badges" id="mainBadges"></div>
+          </div>
+          <div class="controls" style="gap:8px">
+            <a class="btn" id="openAreaMaps" href="#" target="_blank" rel="noopener">Open neighborhood in Maps</a>
+          </div>
+        </div>
+
+        <div class="items" id="items"></div>
+      </div>
+    </div>
   </div>
 
   <!-- Modal -->
@@ -250,460 +236,274 @@
     <div class="modalCard">
       <div class="modalHeader">
         <h3 id="ideasTitle">100 more ideas</h3>
-        <button id="ideasClose" class="btn">Close</button>
+        <button class="btn" id="ideasClose">Close</button>
       </div>
-      <div class="small" style="padding-top:10px">
-        These are generated live as “search near this place” links, so they stay fresh without any API keys.
-      </div>
-      <div id="ideasList" class="ideasList"></div>
+      <div class="ideas" id="ideasGrid"></div>
     </div>
   </div>
 
-  <script>
-    /***********************
-     * 1) YOUR DATA (EDIT THIS)
-     ***********************/
-    const PLACES = [
-      // You can keep adding your big packs here.
-      // Format:
-      // {id:"unique", name:"Place", area:"Soho", kind:"Food & Drink", tags:["food","walkable"], blurb:"...", free:true, time:"1–2h", mapQuery:"Place name London"}
+<script>
+/*** EDIT THIS: add more items. The UI groups by neighborhood automatically. ***/
+const ITEMS = [
+  // Covent Garden
+  { id:"neals_yard", name:"Neal’s Yard", neighborhood:"Covent Garden", kind:"Architecture & Streets", blurb:"Hidden colorful courtyard—quick serotonin stop.", free:true, time:"Quick", mapQuery:"Neal's Yard London" },
+  { id:"dishoom_cg", name:"Dishoom (Covent Garden)", neighborhood:"Covent Garden", kind:"Food & Drink", blurb:"Bombay café vibe—great brunch/dinner (book/wait).", free:false, time:"1–2h", mapQuery:"Dishoom Covent Garden" },
+  { id:"soane", name:"Sir John Soane’s Museum", neighborhood:"Covent Garden", kind:"Museums & Collections", blurb:"The most magical small museum—rooms packed with treasures.", free:true, time:"1–2h", mapQuery:"Sir John Soane's Museum" },
+  { id:"seven_dials", name:"Seven Dials", neighborhood:"Covent Garden", kind:"Walks", blurb:"Cute streets + shopping + people-watching loop.", free:true, time:"Quick", mapQuery:"Seven Dials London" },
 
-      {id:"borough_market", name:"Borough Market", area:"Borough", kind:"Food & Drink", tags:["food","walkable","markets"], blurb:"Legendary food market—go hungry.", free:true, time:"1–2h", mapQuery:"Borough Market"},
-      {id:"sky_garden", name:"Sky Garden (book ahead)", area:"City of London", kind:"Views & Landmarks", tags:["views","indoor","photo spots"], blurb:"Free indoor garden viewpoint—reserve if possible.", free:true, time:"1–2h", mapQuery:"Sky Garden London"},
-      {id:"primrose", name:"Primrose Hill", area:"Primrose Hill", kind:"Views & Landmarks", tags:["views","walkable","photo spots"], blurb:"Short climb = big skyline payoff. Sunset is elite.", free:true, time:"1–2h", mapQuery:"Primrose Hill"},
-      {id:"tate_modern", name:"Tate Modern", area:"Bankside", kind:"Museums & Collections", tags:["indoor","museums","views"], blurb:"Modern art + great free museum; don’t miss the viewing level.", free:true, time:"Half-day", mapQuery:"Tate Modern"},
-      {id:"vanda", name:"V&A (Victoria and Albert Museum)", area:"South Kensington", kind:"Museums & Collections", tags:["indoor","museums","photo spots"], blurb:"Design, fashion, décor—one of London’s best.", free:true, time:"Half-day", mapQuery:"Victoria and Albert Museum"},
-      {id:"leadenhall", name:"Leadenhall Market", area:"City of London", kind:"Architecture & Streets", tags:["walkable","photo spots","markets"], blurb:"Victorian covered market—one of London’s prettiest interiors.", free:true, time:"Quick", mapQuery:"Leadenhall Market"},
-      {id:"neals_yard", name:"Neal’s Yard", area:"Covent Garden", kind:"Architecture & Streets", tags:["walkable","photo spots","hidden"], blurb:"Hidden colorful courtyard—quick serotonin stop.", free:true, time:"Quick", mapQuery:"Neal's Yard London"},
-      {id:"st_dunstan", name:"St Dunstan-in-the-East (Ruins Garden)", area:"City of London", kind:"Parks & Gardens", tags:["walkable","photo spots","hidden"], blurb:"Bombed church turned secret garden—quiet + cinematic.", free:true, time:"Quick", mapQuery:"St Dunstan in the East"},
-      {id:"soane", name:"Sir John Soane’s Museum", area:"Holborn", kind:"Museums & Collections", tags:["indoor","museums","hidden"], blurb:"One of the most magical small museums in London.", free:true, time:"1–2h", mapQuery:"Sir John Soane's Museum"},
-      {id:"camden", name:"Camden Market", area:"Camden", kind:"Markets", tags:["markets","food","walkable"], blurb:"Huge street food selection—go with a group to sample more.", free:true, time:"Half-day", mapQuery:"Camden Market"},
-      {id:"shoreditch_art", name:"Shoreditch street art loop", area:"Shoreditch", kind:"Street Art & Hidden Finds", tags:["walkable","photo spots","hidden"], blurb:"Graffiti + coffee + vintage shops.", free:true, time:"Half-day", mapQuery:"Shoreditch street art"},
-      {id:"waterloo_bridge", name:"Waterloo Bridge (sunset view)", area:"South Bank", kind:"Views & Landmarks", tags:["views","photo spots","walkable"], blurb:"Bridge views that feel like a movie—best at golden hour.", free:true, time:"Quick", mapQuery:"Waterloo Bridge"},
-      {id:"dishoom", name:"Dishoom (Covent Garden)", area:"Covent Garden", kind:"Food & Drink", tags:["food","walkable"], blurb:"Beloved Bombay café vibe—great brunch/dinner.", free:false, time:"1–2h", mapQuery:"Dishoom Covent Garden"},
-      {id:"postmans", name:"Postman’s Park", area:"City of London", kind:"Parks & Gardens", tags:["walkable","hidden","history"], blurb:"Quiet park with tile memorials that hit you in the feels.", free:true, time:"Quick", mapQuery:"Postman's Park"},
-      {id:"greenwich", name:"Greenwich day loop (park → market → river)", area:"Greenwich", kind:"Walks", tags:["walkable","views","markets"], blurb:"One of the best ‘whole day’ neighborhoods to explore.", free:true, time:"Half-day", mapQuery:"Greenwich London"},
-    ];
+  // Soho
+  { id:"soho_walk", name:"Soho wander", neighborhood:"Soho", kind:"Walks", blurb:"Neon streets, tiny lanes, best late-night energy.", free:true, time:"1–2h", mapQuery:"Soho London" },
 
-    /***********************
-     * 2) CATEGORY SETUP
-     ***********************/
-    // We show chips based on "kind" (your categories) AND a few important tags.
-    const EXTRA_TAG_CHIPS = [
-      {key:"free", label:"Free"},
-      {key:"quick", label:"Quick"},
-      {key:"food", label:"Food"},
-      {key:"views", label:"Views"},
-      {key:"museums", label:"Museums"},
-      {key:"markets", label:"Markets"},
-      {key:"hidden", label:"Hidden / Unusual"},
-      {key:"photo spots", label:"Photo spots"},
-      {key:"walkable", label:"Walkable"},
-      {key:"indoor", label:"Indoor"}
-    ];
+  // Shoreditch
+  { id:"shoreditch_art", name:"Shoreditch street art loop", neighborhood:"Shoreditch", kind:"Street Art & Hidden Finds", blurb:"Graffiti + coffee + vintage shops.", free:true, time:"Half-day", mapQuery:"Shoreditch street art" },
 
-    const state = {
-      q: "",
-      freeOnly: false,
-      quickOnly: false,
-      activeChips: new Set(), // can include kind or tag keys
-      sortMode: 0 // 0 recommended, 1 A-Z, 2 free first
-    };
+  // South Bank
+  { id:"waterloo_bridge", name:"Waterloo Bridge (sunset view)", neighborhood:"South Bank", kind:"Views & Landmarks", blurb:"Bridge views that feel like a movie—best at golden hour.", free:true, time:"Quick", mapQuery:"Waterloo Bridge" },
 
-    const grid = document.getElementById("grid");
-    const chipsEl = document.getElementById("chips");
-    const qEl = document.getElementById("q");
-    const countEl = document.getElementById("count");
-    const freeBtn = document.getElementById("freeBtn");
-    const quickBtn = document.getElementById("quickBtn");
-    const resetBtn = document.getElementById("resetBtn");
-    const sortBtn = document.getElementById("sortBtn");
+  // City of London
+  { id:"st_dunstan", name:"St Dunstan-in-the-East (Ruins Garden)", neighborhood:"City of London", kind:"Parks & Gardens", blurb:"Bombed church turned secret garden—quiet + cinematic.", free:true, time:"Quick", mapQuery:"St Dunstan in the East" },
+  { id:"leadenhall", name:"Leadenhall Market", neighborhood:"City of London", kind:"Architecture & Streets", blurb:"Victorian covered market—one of London’s prettiest interiors.", free:true, time:"Quick", mapQuery:"Leadenhall Market" },
 
-    function uniq(arr){ return Array.from(new Set(arr)); }
+  // Camden
+  { id:"camden_market", name:"Camden Market", neighborhood:"Camden", kind:"Markets", blurb:"Huge street food selection—go with friends to sample more.", free:true, time:"Half-day", mapQuery:"Camden Market" },
 
-    function buildChipList(){
-      const kinds = uniq(PLACES.map(p => p.kind).filter(Boolean)).sort((a,b)=>a.localeCompare(b));
-      const chips = [
-        ...kinds.map(k => ({key:k, label:k})),
-        ...EXTRA_TAG_CHIPS
-      ];
-      return chips;
-    }
+  // Borough
+  { id:"borough_market", name:"Borough Market", neighborhood:"Borough", kind:"Markets", blurb:"Legendary food market—go hungry.", free:true, time:"1–2h", mapQuery:"Borough Market" },
 
-    function renderChips(){
-      const chips = buildChipList();
-      chipsEl.innerHTML = chips.map(c => {
-        const on = state.activeChips.has(c.key) ? "on" : "";
-        return `<div class="chip ${on}" data-key="${escapeHtml(c.key)}">${escapeHtml(c.label)}</div>`;
-      }).join("");
+  // South Kensington
+  { id:"vanda", name:"V&A (Victoria and Albert Museum)", neighborhood:"South Kensington", kind:"Museums & Collections", blurb:"Design + fashion + décor—one of London’s best.", free:true, time:"Half-day", mapQuery:"Victoria and Albert Museum" },
 
-      chipsEl.querySelectorAll(".chip").forEach(ch => {
-        ch.addEventListener("click", () => {
-          const key = ch.getAttribute("data-key");
-          if(state.activeChips.has(key)) state.activeChips.delete(key);
-          else state.activeChips.add(key);
-          render();
-        });
-      });
-    }
+  // Bankside
+  { id:"tate_modern", name:"Tate Modern", neighborhood:"Bankside", kind:"Museums & Collections", blurb:"Modern art + great free museum; don’t miss the viewing level.", free:true, time:"Half-day", mapQuery:"Tate Modern" },
 
-    /***********************
-     * 3) FILTERING + SORTING
-     ***********************/
-    function matchesQuery(p, q){
-      if(!q) return true;
-      const hay = [
-        p.name, p.area, p.kind, p.blurb,
-        ...(p.tags || [])
-      ].filter(Boolean).join(" ").toLowerCase();
-      return hay.includes(q.toLowerCase());
-    }
+  // Primrose Hill
+  { id:"primrose", name:"Primrose Hill", neighborhood:"Primrose Hill", kind:"Views & Landmarks", blurb:"Short climb = big skyline payoff. Sunset is elite.", free:true, time:"1–2h", mapQuery:"Primrose Hill" },
 
-    function matchesChips(p){
-      if(state.activeChips.size === 0) return true;
+  // Greenwich
+  { id:"greenwich_loop", name:"Greenwich day loop", neighborhood:"Greenwich", kind:"Walks", blurb:"Park → market → river. Great full-day neighborhood.", free:true, time:"Half-day", mapQuery:"Greenwich London" },
+];
 
-      // chip can be a kind or a tag
-      const tags = new Set((p.tags || []).map(t => String(t)));
-      const kind = p.kind || "";
-      for(const key of state.activeChips){
-        if(key === kind) continue;
-        if(tags.has(key)) continue;
-        // allow extra chips: "Free" and "Quick"
-        if(key === "free" && p.free === true) continue;
-        if(key === "quick" && String(p.time || "").toLowerCase().includes("quick")) continue;
+/*** 100 idea templates (Maps searches, no API keys) ***/
+const IDEA_TEMPLATES = [
+  "best coffee near {q}","best bakery near {q}","best brunch near {q}","best pubs near {q}","best cocktails near {q}",
+  "best wine bar near {q}","best rooftop bar near {q}","best cheap eats near {q}","best street food near {q}",
+  "best fish and chips near {q}","best Sunday roast near {q}","best dessert near {q}","best afternoon tea near {q}",
+  "late night food near {q}","food market near {q}","vintage market near {q}","bookstore near {q}","record store near {q}",
+  "independent shops near {q}","best photo spots near {q}","hidden gems near {q}","secret alleys near {q}",
+  "mews streets near {q}","street art near {q}","historic pubs near {q}","historic churches near {q}",
+  "historic buildings near {q}","free museums near {q}","small museums near {q}","art galleries near {q}",
+  "live music near {q}","jazz bar near {q}","theatre shows near {q}","comedy club near {q}",
+  "cinema near {q}","things to do tonight near {q}","free things to do near {q}","walks near {q}",
+  "best viewpoints near {q}","sunset spots near {q}","riverside walk near {q}","canal walk near {q}",
+  "parks near {q}","gardens near {q}","picnic spots near {q}","rainy day activities near {q}",
+  "best Instagram spots near {q}","architecture walk near {q}","walking tour near {q}","self guided walking tour near {q}",
+  "best museums near {q}","best markets near {q}","best shopping streets near {q}","best bakeries near {q}",
+  "best ice cream near {q}","best tea shops near {q}","best skyline view near {q}","best thrift shops near {q}",
+  "best vintage shops near {q}","best neighborhoods to walk near {q}","best places to people watch near {q}",
+  "hidden courtyards near {q}","cute streets near {q}","free exhibitions near {q}","events this weekend near {q}",
+  "pop up markets near {q}","seasonal events near {q}","best day trip ideas from {q}","best souvenirs near {q}",
+  "best cheap date ideas near {q}","best nighttime photos near {q}","best scenic streets near {q}",
+  "best quick bites near {q}","best shopping arcades near {q}","best riverside pubs near {q}",
+  "best local favorites near {q}","best underrated spots near {q}","best things to do for 2 hours near {q}",
+  "best free viewpoints near {q}","best parks for a picnic near {q}","best walks with views near {q}",
+  "best museums open late near {q}","best small galleries near {q}","best food halls near {q}",
+  "best late-night bars near {q}","best cozy cafes near {q}","best bookstores + cafes near {q}",
+  "best desserts + cafes near {q}","best people-watching cafes near {q}","best photo walk route near {q}",
+  "best historic streets near {q}","best secret spots near {q}","best markets for snacks near {q}"
+].slice(0,100);
 
-        // if doesn't match this key, fail (AND behavior)
-        return false;
-      }
-      // All keys passed? Also ensure kind keys match if selected:
-      for(const key of state.activeChips){
-        if(key === kind) continue;
-      }
-      // If any kind chip is selected, require it to match as well:
-      const kindChipsSelected = Array.from(state.activeChips).filter(k => buildChipList().some(x => x.key === k && x.label === k) && k === k);
-      // ^ simple: if selected key matches any existing kind it will be in list; but we already handle tags above.
-      // We’ll just do this: if any selected key equals some kind in data, enforce matching one of them.
-      const allKinds = new Set(PLACES.map(p=>p.kind).filter(Boolean));
-      const selectedKinds = Array.from(state.activeChips).filter(k => allKinds.has(k));
-      if(selectedKinds.length > 0 && !selectedKinds.includes(kind)) return false;
+function esc(s){
+  return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+}
+function mapsSearchUrl(query){
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+function areaMapsUrl(neighborhood){
+  return mapsSearchUrl(`${neighborhood} London`);
+}
 
-      return true;
-    }
+const state = { neighborhood:null, q:"", freeOnly:false, quickOnly:false };
 
-    function applyToggles(p){
-      if(state.freeOnly && !p.free) return false;
-      if(state.quickOnly && !String(p.time || "").toLowerCase().includes("quick")) return false;
-      return true;
-    }
+const neighList = document.getElementById("neighList");
+const neighCount = document.getElementById("neighCount");
+const itemsEl = document.getElementById("items");
+const mainTitle = document.getElementById("mainTitle");
+const mainBadges = document.getElementById("mainBadges");
+const openAreaMaps = document.getElementById("openAreaMaps");
+const metaLeft = document.getElementById("metaLeft");
+const metaRight = document.getElementById("metaRight");
 
-    function sortPlaces(list){
-      const arr = [...list];
-      if(state.sortMode === 1){
-        arr.sort((a,b)=>a.name.localeCompare(b.name));
-      } else if(state.sortMode === 2){
-        arr.sort((a,b)=> (b.free===true) - (a.free===true) || a.name.localeCompare(b.name));
-      } else {
-        // "Recommended": quick + free + high-signal tags
-        function score(p){
-          let s=0;
-          if(p.free) s+=2;
-          if(String(p.time||"").toLowerCase().includes("quick")) s+=1;
-          const tags = (p.tags||[]);
-          if(tags.includes("views")) s+=1;
-          if(tags.includes("photo spots")) s+=1;
-          if(tags.includes("hidden") || tags.includes("unusual")) s+=1;
-          return s;
-        }
-        arr.sort((a,b)=>score(b)-score(a) || a.name.localeCompare(b.name));
-      }
-      return arr;
-    }
+const qEl = document.getElementById("q");
+const freeBtn = document.getElementById("freeBtn");
+const quickBtn = document.getElementById("quickBtn");
+const resetBtn = document.getElementById("resetBtn");
+const ideasBtn = document.getElementById("ideasBtn");
 
-    /***********************
-     * 4) 100 IDEAS GENERATOR (NO API KEYS)
-     ***********************/
-    const IDEA_TEMPLATES = [
-      "best coffee near {q}",
-      "best bakery near {q}",
-      "best brunch near {q}",
-      "best pubs near {q}",
-      "best cocktails near {q}",
-      "best wine bar near {q}",
-      "best rooftop bar near {q}",
-      "best cheap eats near {q}",
-      "best street food near {q}",
-      "best fish and chips near {q}",
-      "best Sunday roast near {q}",
-      "best dessert near {q}",
-      "best afternoon tea near {q}",
-      "best ramen near {q}",
-      "best pasta near {q}",
-      "best Indian food near {q}",
-      "best Chinese food near {q}",
-      "best Korean food near {q}",
-      "best Middle Eastern food near {q}",
-      "best vegetarian food near {q}",
-      "best vegan food near {q}",
-      "late night food near {q}",
-      "food market near {q}",
-      "farmers market near {q}",
-      "vintage market near {q}",
-      "bookstore near {q}",
-      "record store near {q}",
-      "independent shops near {q}",
-      "design shops near {q}",
-      "gift shops near {q}",
-      "best photo spots near {q}",
-      "hidden gems near {q}",
-      "secret alleys near {q}",
-      "mews streets near {q}",
-      "street art near {q}",
-      "murals near {q}",
-      "historic pubs near {q}",
-      "historic churches near {q}",
-      "historic buildings near {q}",
-      "free museums near {q}",
-      "small museums near {q}",
-      "art galleries near {q}",
-      "modern art near {q}",
-      "live music near {q}",
-      "jazz bar near {q}",
-      "theatre shows near {q}",
-      "comedy club near {q}",
-      "cinema near {q}",
-      "things to do tonight near {q}",
-      "free things to do near {q}",
-      "walks near {q}",
-      "best viewpoints near {q}",
-      "sunset spots near {q}",
-      "riverside walk near {q}",
-      "canal walk near {q}",
-      "parks near {q}",
-      "gardens near {q}",
-      "picnic spots near {q}",
-      "museums open late near {q}",
-      "family friendly things near {q}",
-      "rainy day activities near {q}",
-      "bookshops + cafes near {q}",
-      "cozy cafes near {q}",
-      "breakfast near {q}",
-      "lunch near {q}",
-      "dinner near {q}",
-      "cheap activities near {q}",
-      "best Instagram spots near {q}",
-      "architecture walk near {q}",
-      "bridge viewpoints near {q}",
-      "river cruise near {q}",
-      "boat trips near {q}",
-      "historic tours near {q}",
-      "walking tour near {q}",
-      "self guided walking tour near {q}",
-      "best museums near {q}",
-      "best markets near {q}",
-      "best shopping streets near {q}",
-      "best bookstores near {q}",
-      "best parks near {q}",
-      "best gardens near {q}",
-      "best bakeries near {q}",
-      "best pastries near {q}",
-      "best donuts near {q}",
-      "best ice cream near {q}",
-      "best tea shops near {q}",
-      "best views free near {q}",
-      "best skyline view near {q}",
-      "best museum gift shop near {q}",
-      "best thrift shops near {q}",
-      "best vintage shops near {q}",
-      "best neighborhoods to walk near {q}",
-      "best places to people watch near {q}",
-      "hidden courtyards near {q}",
-      "cute streets near {q}",
-      "free exhibitions near {q}",
-      "events this weekend near {q}",
-      "pop up markets near {q}",
-      "seasonal events near {q}",
-      "best day trip ideas from {q}",
-      "best spots for souvenirs near {q}",
-      "best parks for a picnic near {q}",
-      "best walks with views near {q}",
-      "best museums for beginners near {q}",
-      "best bars with a view near {q}",
-      "best neighborhood for food near {q}",
-      "best things to do for 2 hours near {q}",
-      "best places to sit and chill near {q}",
-      "best cheap date ideas near {q}",
-      "best nighttime photos near {q}",
-      "best scenic streets near {q}",
-      "best free viewpoints near {q}",
-      "best quick bites near {q}",
-      "best shopping arcades near {q}",
-      "best hidden museums near {q}",
-      "best riverside pubs near {q}",
-      "best street food markets near {q}",
-      "best art exhibits near {q}",
-      "best weekend activities near {q}",
-      "best local favorites near {q}",
-      "best underrated spots near {q}",
-      "best ‘London vibe’ spots near {q}"
-    ].slice(0,100);
+// modal
+const ideasModal = document.getElementById("ideasModal");
+const ideasTitle = document.getElementById("ideasTitle");
+const ideasGrid = document.getElementById("ideasGrid");
+const ideasClose = document.getElementById("ideasClose");
 
-    function mapsSearchUrl(query){
-      return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
-    }
-    function build100Ideas(place){
-      const base = (place.mapQuery || place.name || "London") + " London";
-      return IDEA_TEMPLATES.map(t => {
-        const q = t.replace("{q}", base);
-        const label = t.replace(" near {q}", "").replace("{q}","").trim();
-        return { label, query: q, url: mapsSearchUrl(q) };
-      });
-    }
+ideasClose.addEventListener("click", ()=>ideasModal.classList.add("hidden"));
+ideasModal.addEventListener("click", (e)=>{ if(e.target===ideasModal) ideasModal.classList.add("hidden"); });
 
-    // Modal wiring
-    const ideasModal = document.getElementById("ideasModal");
-    const ideasTitle = document.getElementById("ideasTitle");
-    const ideasList  = document.getElementById("ideasList");
-    const ideasClose = document.getElementById("ideasClose");
+function neighborhoods(){
+  const list = Array.from(new Set(ITEMS.map(i=>i.neighborhood).filter(Boolean))).sort((a,b)=>a.localeCompare(b));
+  return list;
+}
+function countByNeighborhood(){
+  const m = new Map();
+  for(const it of ITEMS){
+    const n = it.neighborhood || "London";
+    m.set(n, (m.get(n)||0)+1);
+  }
+  return m;
+}
+function renderNeighborhoods(){
+  const list = neighborhoods();
+  const counts = countByNeighborhood();
+  neighCount.textContent = `${list.length}`;
+  neighList.innerHTML = list.map(n => {
+    const active = (state.neighborhood===n) ? "active" : "";
+    const c = counts.get(n)||0;
+    return `<div class="neigh ${active}" data-n="${esc(n)}">
+      <div style="font-weight:650">${esc(n)}</div>
+      <small>${c} saved spots</small>
+    </div>`;
+  }).join("");
 
-    ideasClose.addEventListener("click", () => ideasModal.classList.add("hidden"));
-    ideasModal.addEventListener("click", (e) => { if(e.target === ideasModal) ideasModal.classList.add("hidden"); });
+  neighList.querySelectorAll(".neigh").forEach(el=>{
+    el.addEventListener("click", ()=>{
+      state.neighborhood = el.getAttribute("data-n");
+      renderAll();
+    });
+  });
 
-    function openIdeasById(placeId){
-      const place = PLACES.find(p => p.id === placeId);
-      if(!place) return;
-      ideasTitle.textContent = `100 more things near ${place.name}`;
-      const ideas = build100Ideas(place);
-      ideasList.innerHTML = ideas.map(i => `
-        <div class="ideaItem">
-          <strong>${escapeHtml(i.label)}</strong>
-          <div class="small">${escapeHtml(i.query)}</div>
-          <a class="btn primary" href="${i.url}" target="_blank" rel="noopener">Open in Maps</a>
+  // default select first neighborhood if none
+  if(!state.neighborhood && list.length){
+    state.neighborhood = list[0];
+  }
+}
+
+function matchesFilters(it){
+  const q = state.q.trim().toLowerCase();
+  if(q){
+    const hay = `${it.name} ${it.kind||""} ${it.blurb||""}`.toLowerCase();
+    if(!hay.includes(q)) return false;
+  }
+  if(state.freeOnly && !it.free) return false;
+  if(state.quickOnly && String(it.time||"").toLowerCase().includes("quick")===false) return false;
+  return true;
+}
+
+function renderItems(){
+  const n = state.neighborhood;
+  if(!n){
+    mainTitle.textContent = "Select a neighborhood";
+    itemsEl.innerHTML = "";
+    mainBadges.innerHTML = "";
+    openAreaMaps.href = "#";
+    metaLeft.textContent = "";
+    metaRight.textContent = "";
+    return;
+  }
+
+  const allInArea = ITEMS.filter(i => i.neighborhood===n);
+  const filtered = allInArea.filter(matchesFilters);
+
+  mainTitle.textContent = n;
+  openAreaMaps.href = areaMapsUrl(n);
+
+  // badges summary
+  const kinds = Array.from(new Set(allInArea.map(i=>i.kind).filter(Boolean))).slice(0,8);
+  mainBadges.innerHTML = `
+    <span class="badge">${allInArea.length} saved spots</span>
+    <span class="badge">${filtered.length} showing</span>
+    ${kinds.map(k=>`<span class="badge">${esc(k)}</span>`).join("")}
+  `;
+
+  metaLeft.textContent = `Neighborhood: ${n}`;
+  metaRight.textContent = `Showing ${filtered.length} of ${allInArea.length} saved spots`;
+
+  itemsEl.innerHTML = filtered.map(it=>{
+    const mapQ = it.mapQuery || `${it.name} ${n} London`;
+    const maps = mapsSearchUrl(mapQ);
+    const learn = `https://www.google.com/search?q=${encodeURIComponent(`${it.name} ${n} London`)}`;
+    const pillClass = it.free ? "free" : "paid";
+    return `
+      <article class="card">
+        <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+          <h3>${esc(it.name)}</h3>
+          <span class="pill ${pillClass}">${it.free ? "Free" : "Paid"}</span>
         </div>
-      `).join("");
-      ideasModal.classList.remove("hidden");
-    }
+        <div class="pill" style="width:max-content">${esc(it.kind||"Thing to do")}${it.time ? ` • ${esc(it.time)}` : ""}</div>
+        <p>${esc(it.blurb||"")}</p>
+        <div class="cardRow">
+          <a class="btn" href="${maps}" target="_blank" rel="noopener">Open in Maps</a>
+          <a class="btn" href="${learn}" target="_blank" rel="noopener">Learn more</a>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
 
-    /***********************
-     * 5) RENDER
-     ***********************/
-    function escapeHtml(s){
-      return String(s)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
+function openIdeas(){
+  const n = state.neighborhood;
+  if(!n) return;
+  ideasTitle.textContent = `100 more things near ${n}`;
+  const base = `${n} London`;
+  const ideas = IDEA_TEMPLATES.map(t=>{
+    const q = t.replace("{q}", base);
+    const label = t.replace(" near {q}","").replace("{q}","").trim();
+    return {label, q, url: mapsSearchUrl(q)};
+  });
+  ideasGrid.innerHTML = ideas.map(i=>`
+    <div class="idea">
+      <strong>${esc(i.label)}</strong>
+      <div class="q">${esc(i.q)}</div>
+      <a class="btn primary" href="${i.url}" target="_blank" rel="noopener">Open in Maps</a>
+    </div>
+  `).join("");
+  ideasModal.classList.remove("hidden");
+}
 
-    function placeMapsUrl(p){
-      const q = p.mapQuery || (p.name + " " + (p.area||"") + " London");
-      return mapsSearchUrl(q);
-    }
-    function placeSearchUrl(p){
-      const q = `${p.name} ${p.area||""} London`;
-      return `https://www.google.com/search?q=${encodeURIComponent(q)}`;
-    }
-    function nearbySearchUrl(p){
-      const q = `things to do near ${p.mapQuery || p.name} London`;
-      return mapsSearchUrl(q);
-    }
+function renderAll(){
+  renderNeighborhoods();
+  // update active highlight
+  neighList.querySelectorAll(".neigh").forEach(el=>{
+    el.classList.toggle("active", el.getAttribute("data-n")===state.neighborhood);
+  });
+  renderItems();
+}
 
-    function render(){
-      const q = state.q.trim();
+qEl.addEventListener("input", e=>{ state.q=e.target.value; renderItems(); });
 
-      let list = PLACES
-        .filter(p => matchesQuery(p, q))
-        .filter(p => matchesChips(p))
-        .filter(p => applyToggles(p));
+freeBtn.addEventListener("click", ()=>{
+  state.freeOnly=!state.freeOnly;
+  freeBtn.setAttribute("aria-pressed", String(state.freeOnly));
+  renderItems();
+});
+quickBtn.addEventListener("click", ()=>{
+  state.quickOnly=!state.quickOnly;
+  quickBtn.setAttribute("aria-pressed", String(state.quickOnly));
+  renderItems();
+});
 
-      list = sortPlaces(list);
+ideasBtn.addEventListener("click", openIdeas);
 
-      countEl.textContent = `${list.length} places`;
+resetBtn.addEventListener("click", ()=>{
+  state.q=""; state.freeOnly=false; state.quickOnly=false;
+  qEl.value="";
+  freeBtn.setAttribute("aria-pressed","false");
+  quickBtn.setAttribute("aria-pressed","false");
+  renderAll();
+});
 
-      grid.innerHTML = list.map(p => {
-        const tags = (p.tags || []).slice(0,6);
-        return `
-          <article class="card">
-            <div class="cardTop">
-              <div>
-                <div class="title">${escapeHtml(p.name)}</div>
-                <div class="small" style="margin-top:6px">${escapeHtml(p.area || "London")} • ${escapeHtml(p.kind || "Things to do")}</div>
-              </div>
-              <div class="pill">${p.free ? "Free" : "Paid"}</div>
-            </div>
-
-            <p class="blurb">${escapeHtml(p.blurb || "")}</p>
-
-            <div class="kv">
-              ${p.time ? `<span>⏱ ${escapeHtml(p.time)}</span>` : ""}
-              ${tags.map(t => `<span>#${escapeHtml(t)}</span>`).join("")}
-            </div>
-
-            <div class="actions">
-              <a class="btn" href="${placeMapsUrl(p)}" target="_blank" rel="noopener">Open in Maps</a>
-              <a class="btn" href="${placeSearchUrl(p)}" target="_blank" rel="noopener">Learn more</a>
-              <a class="btn" href="${nearbySearchUrl(p)}" target="_blank" rel="noopener">Nearby</a>
-              <button class="btn primary" onclick="openIdeasById('${escapeHtml(p.id)}')">100 more near here</button>
-            </div>
-          </article>
-        `;
-      }).join("");
-    }
-
-    /***********************
-     * 6) UI EVENTS
-     ***********************/
-    qEl.addEventListener("input", (e) => {
-      state.q = e.target.value;
-      render();
-    });
-
-    freeBtn.addEventListener("click", () => {
-      state.freeOnly = !state.freeOnly;
-      freeBtn.setAttribute("aria-pressed", String(state.freeOnly));
-      freeBtn.classList.toggle("primary", state.freeOnly);
-      render();
-    });
-
-    quickBtn.addEventListener("click", () => {
-      state.quickOnly = !state.quickOnly;
-      quickBtn.setAttribute("aria-pressed", String(state.quickOnly));
-      quickBtn.classList.toggle("primary", state.quickOnly);
-      render();
-    });
-
-    resetBtn.addEventListener("click", () => {
-      state.q = "";
-      state.freeOnly = false;
-      state.quickOnly = false;
-      state.activeChips.clear();
-      state.sortMode = 0;
-
-      qEl.value = "";
-      freeBtn.classList.remove("primary");
-      quickBtn.classList.remove("primary");
-      freeBtn.setAttribute("aria-pressed","false");
-      quickBtn.setAttribute("aria-pressed","false");
-      sortBtn.textContent = "Sort: Recommended";
-
-      renderChips();
-      render();
-    });
-
-    sortBtn.addEventListener("click", () => {
-      state.sortMode = (state.sortMode + 1) % 3;
-      sortBtn.textContent =
-        state.sortMode === 0 ? "Sort: Recommended" :
-        state.sortMode === 1 ? "Sort: A–Z" :
-        "Sort: Free first";
-      render();
-    });
-
-    /***********************
-     * 7) START
-     ***********************/
-    renderChips();
-    render();
-  </script>
+// start
+renderAll();
+</script>
 </body>
 </html>
+
