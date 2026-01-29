@@ -400,6 +400,149 @@ const PLACES = [
   {id:"shard_view", name:"The View from The Shard", area:"London Bridge", kind:"Views & Landmarks", tags:["views","photos"], blurb:"Paid iconic viewpoint—amazing at sunset.", free:false, time:"1–2h", mapQuery:"The View from The Shard"},
   {id:"london_eye", name:"London Eye", area:"South Bank", kind:"Views & Landmarks", tags:["views"], blurb:"Touristy but fun if it’s your first time.", free:false, time:"1–2h", mapQuery:"London Eye"},
   {id:"ceremony_guard", name:"Changing of the Guard (timed event)", area:"Westminster", kind:"Games & Experiences", tags:["historic","photos"], blurb:"Check schedule; arrive early for a good view.", free:true, time:"1–2h", mapQuery:"Changing of the Guard London"},
+// ✅ ADD-ON PACK: 120+ more London places (same format)
+// Paste these INSIDE your existing const PLACES = [ ... ] array (anywhere), with commas between items.
+
+  // ---------------------------
+  // FOOD & DRINK (MORE)
+  // ---------------------------
+  {id:"dishoom_kx", name:"Dishoom (King’s Cross)", area:"King’s Cross", kind:"Food & Drink", tags:["food","walkable"], blurb:"Same iconic vibe, great pre-canal stroll meal.", free:false, time:"1–2h", mapQuery:"Dishoom King's Cross"},
+  {id:"honest_burgers", name:"Honest Burgers (Soho)", area:"Soho", kind:"Food & Drink", tags:["food","walkable"], blurb:"Solid burgers + rosemary chips. Easy crowd-pleaser.", free:false, time:"1–2h", mapQuery:"Honest Burgers Soho"},
+  {id:"bao_soho", name:"BAO (Soho)", area:"Soho", kind:"Food & Drink", tags:["food","walkable"], blurb:"Famous bao buns—go early or expect a wait.", free:false, time:"1–2h", mapQuery:"BAO Soho"},
+  {id:"hoppers", name:"Hoppers (Soho)", area:"Soho", kind:"Food & Drink", tags:["food","walkable"], blurb:"Sri Lankan/Tamil comfort food. Great for sharing.", free:false, time:"1–2h", mapQuery:"Hoppers Soho"},
+  {id:"mams_persian", name:"Berenjak (Soho)", area:"Soho", kind:"Food & Drink", tags:["food","walkable"], blurb:"Persian small plates—super vibey dinner spot.", free:false, time:"1–2h", mapQuery:"Berenjak Soho"},
+  {id:"bancone_covent", name:"Bancone (Covent Garden)", area:"Covent Garden", kind:"Food & Drink", tags:["food","walkable"], blurb:"Handmade pasta—popular for a reason.", free:false, time:"1–2h", mapQuery:"Bancone Covent Garden"},
+  {id:"gloria_shoreditch", name:"Gloria (Shoreditch)", area:"Shoreditch", kind:"Food & Drink", tags:["food","photo spots"], blurb:"Big Italian energy—fun decor + great for groups.", free:false, time:"1–2h", mapQuery:"Gloria Shoreditch"},
+  {id:"circolo_popolare", name:"Circolo Popolare", area:"Fitzrovia", kind:"Food & Drink", tags:["food","photo spots"], blurb:"Italian party restaurant—very ‘London TikTok’.", free:false, time:"1–2h", mapQuery:"Circolo Popolare London"},
+  {id:"the_ivys", name:"The Ivy (Covent Garden)", area:"Covent Garden", kind:"Food & Drink", tags:["food","photo spots"], blurb:"Classic ‘treat yourself’ London vibe.", free:false, time:"1–2h", mapQuery:"The Ivy Covent Garden"},
+  {id:"brasserie_zedel", name:"Brasserie Zédel", area:"Piccadilly", kind:"Food & Drink", tags:["food","indoor"], blurb:"Grand French brasserie—great value for the setting.", free:false, time:"1–2h", mapQuery:"Brasserie Zedel"},
+  {id:"jerk_jamaica", name:"Rudie’s Jerk Shack", area:"Soho", kind:"Food & Drink", tags:["food","walkable"], blurb:"Quick Caribbean bite when you’re exploring Soho.", free:false, time:"Quick", mapQuery:"Rudie's Jerk Shack Soho"},
+  {id:"ramen_kanada", name:"Kanada-Ya Ramen", area:"Soho", kind:"Food & Drink", tags:["food","walkable"], blurb:"Top-tier ramen—expect lines at peak times.", free:false, time:"1–2h", mapQuery:"Kanada-Ya Soho"},
+  {id:"flat_iron_covent", name:"Flat Iron (Covent Garden)", area:"Covent Garden", kind:"Food & Drink", tags:["food","walkable"], blurb:"Affordable steak + easy central location.", free:false, time:"1–2h", mapQuery:"Flat Iron Covent Garden"},
+  {id:"duck_waffle", name:"Duck & Waffle", area:"City of London", kind:"Food & Drink", tags:["food","views","photo spots"], blurb:"Sky-high dining—late-night/early morning is iconic.", free:false, time:"1–2h", mapQuery:"Duck & Waffle"},
+  {id:"eataly", name:"Eataly London", area:"Bishopsgate", kind:"Food & Drink", tags:["food","indoor"], blurb:"Italian food hall + groceries—easy stop near Liverpool St.", free:true, time:"1–2h", mapQuery:"Eataly London"},
+  {id:"fortnum", name:"Fortnum & Mason (food halls)", area:"Piccadilly", kind:"Food & Drink", tags:["food","indoor","photo spots"], blurb:"Iconic luxury groceries + tea gifts + vibes.", free:true, time:"1–2h", mapQuery:"Fortnum & Mason"},
+  {id:"liberty_food", name:"Liberty London (shopping + café)", area:"Soho", kind:"Food & Drink", tags:["food","photo spots","walkable"], blurb:"Gorgeous building—browse + quick café break.", free:true, time:"1–2h", mapQuery:"Liberty London"},
+  {id:"gails", name:"GAIL’s Bakery (Marylebone)", area:"Marylebone", kind:"Food & Drink", tags:["food","walkable"], blurb:"Easy breakfast/pastry stop while wandering.", free:false, time:"Quick", mapQuery:"GAIL's Bakery Marylebone"},
+  {id:"watchhouse", name:"WatchHouse Coffee (Covent Garden)", area:"Covent Garden", kind:"Food & Drink", tags:["food","walkable"], blurb:"Cute café + great coffee—good planning break.", free:false, time:"Quick", mapQuery:"WatchHouse Covent Garden"},
+  {id:"grind", name:"Shoreditch Grind", area:"Shoreditch", kind:"Food & Drink", tags:["food","photo spots"], blurb:"Coffee by day, cocktails later—classic Shoreditch.", free:false, time:"1–2h", mapQuery:"Shoreditch Grind"},
+  {id:"dovetail", name:"The Wolseley", area:"Piccadilly", kind:"Food & Drink", tags:["food","indoor"], blurb:"Classic London café-restaurant for breakfast/lunch.", free:false, time:"1–2h", mapQuery:"The Wolseley London"},
+  {id:"harrods_food", name:"Harrods Food Halls", area:"Knightsbridge", kind:"Food & Drink", tags:["food","indoor","photo spots"], blurb:"Worth a walkthrough for the spectacle alone.", free:true, time:"1–2h", mapQuery:"Harrods Food Halls"},
+  {id:"the_ivy_market", name:"The Ivy Market Grill", area:"Covent Garden", kind:"Food & Drink", tags:["food","walkable"], blurb:"Reliable central spot after sightseeing.", free:false, time:"1–2h", mapQuery:"Ivy Market Grill"},
+  {id:"gbk", name:"Blacklock (Soho)", area:"Soho", kind:"Food & Drink", tags:["food"], blurb:"Chops + Sundays are legendary—book if you can.", free:false, time:"1–2h", mapQuery:"Blacklock Soho"},
+  {id:"franco_manca", name:"Franco Manca (pizza)", area:"Multiple", kind:"Food & Drink", tags:["food"], blurb:"Affordable sourdough pizza—easy casual meal.", free:false, time:"1–2h", mapQuery:"Franco Manca London"},
+  {id:"shake_shack", name:"Shake Shack (Covent Garden)", area:"Covent Garden", kind:"Food & Drink", tags:["food","walkable"], blurb:"Quick comfort food between stops.", free:false, time:"Quick", mapQuery:"Shake Shack Covent Garden"},
+  {id:"crosstown", name:"Crosstown Doughnuts", area:"Soho", kind:"Food & Drink", tags:["food","walkable"], blurb:"Snack-worthy donuts—grab and go.", free:false, time:"Quick", mapQuery:"Crosstown Doughnuts Soho"},
+  {id:"roast_borough", name:"Roast (Borough Market)", area:"Borough", kind:"Food & Drink", tags:["food","photo spots"], blurb:"Market-adjacent sit-down spot with a view of the bustle.", free:false, time:"1–2h", mapQuery:"Roast Borough Market"},
+  {id:"fishers", name:"Poppies Fish & Chips", area:"Soho", kind:"Food & Drink", tags:["food"], blurb:"Classic fish & chips—very London.", free:false, time:"1–2h", mapQuery:"Poppies Fish & Chips Soho"},
+
+  // ---------------------------
+  // MARKETS (MORE)
+  // ---------------------------
+  {id:"camden_lock", name:"Camden Lock", area:"Camden", kind:"Markets", tags:["walkable","photo spots","food"], blurb:"Canal locks + market vibes + great people-watching.", free:true, time:"1–2h", mapQuery:"Camden Lock"},
+  {id:"leather_lane", name:"Leather Lane Market (weekday lunch)", area:"Holborn", kind:"Markets", tags:["food","walkable"], blurb:"Weekday street food market—local London energy.", free:true, time:"1–2h", mapQuery:"Leather Lane Market"},
+  {id:"greenwich_market", name:"Greenwich Market", area:"Greenwich", kind:"Markets", tags:["food","walkable","photo spots"], blurb:"Craft stalls + snacks—easy pairing with park/river.", free:true, time:"1–2h", mapQuery:"Greenwich Market London"},
+  {id:"old_bailey_food", name:"Exmouth Market", area:"Clerkenwell", kind:"Markets", tags:["food","walkable"], blurb:"Street of cafés + small spots—nice casual stroll.", free:true, time:"1–2h", mapQuery:"Exmouth Market London"},
+  {id:"mews_market", name:"Maltby Street Ropewalk (Bermondsey)", area:"Bermondsey", kind:"Markets", tags:["food"], blurb:"Archway market lane—great weekend bites.", free:true, time:"1–2h", mapQuery:"Maltby Street Market"},
+  {id:"camden_stables", name:"Camden Stables Market", area:"Camden", kind:"Markets", tags:["food","photo spots"], blurb:"Stalls + street food + iconic Camden energy.", free:true, time:"Half-day", mapQuery:"Camden Stables Market"},
+  {id:"berwick_st", name:"Berwick Street Market", area:"Soho", kind:"Markets", tags:["food","walkable"], blurb:"Weekday street market—grab lunch in Soho.", free:true, time:"1–2h", mapQuery:"Berwick Street Market"},
+  {id:"whitecross_st", name:"Whitecross Street Market", area:"Old Street", kind:"Markets", tags:["food","walkable"], blurb:"Weekday lunch market—quick bite near Shoreditch edge.", free:true, time:"1–2h", mapQuery:"Whitecross Street Market"},
+  {id:"brick_lane_market", name:"Brick Lane Market (weekends)", area:"Shoreditch", kind:"Markets", tags:["food","walkable"], blurb:"Vintage + snacks + street art nearby.", free:true, time:"Half-day", mapQuery:"Brick Lane Market"},
+  {id:"southbank_centre_food", name:"Southbank Centre Food Market (weekends)", area:"South Bank", kind:"Markets", tags:["food","walkable","views"], blurb:"Riverside snacks during your South Bank walk.", free:true, time:"1–2h", mapQuery:"Southbank Centre Food Market"},
+
+  // ---------------------------
+  // MUSEUMS & COLLECTIONS (MORE)
+  // ---------------------------
+  {id:"imperial_war_north", name:"Imperial War Museum (main)", area:"Lambeth", kind:"Museums & Collections", tags:["indoor","history"], blurb:"Deep, powerful exhibits—plan time.", free:true, time:"Half-day", mapQuery:"Imperial War Museum London"},
+  {id:"portrait_gallery", name:"National Portrait Gallery", area:"Trafalgar Square", kind:"Museums & Collections", tags:["indoor","photo spots"], blurb:"Portraits + culture—great central indoor stop.", free:true, time:"1–2h", mapQuery:"National Portrait Gallery London"},
+  {id:"courtauld", name:"The Courtauld Gallery", area:"Strand", kind:"Museums & Collections", tags:["indoor","photo spots"], blurb:"Smaller, high-quality art collection in Somerset House.", free:false, time:"1–2h", mapQuery:"Courtauld Gallery"},
+  {id:"wallace", name:"Wallace Collection", area:"Marylebone", kind:"Museums & Collections", tags:["indoor","photo spots"], blurb:"Gorgeous galleries + calm vibe—underrated.", free:true, time:"1–2h", mapQuery:"Wallace Collection"},
+  {id:"museum_london", name:"Museum of London (check location/updates)", area:"City of London", kind:"Museums & Collections", tags:["indoor","history"], blurb:"London’s story across time—check current venue setup.", free:true, time:"Half-day", mapQuery:"Museum of London"},
+  {id:"docklands", name:"Museum of London Docklands", area:"Canary Wharf", kind:"Museums & Collections", tags:["indoor","history"], blurb:"Trade + river history—great and underrated.", free:true, time:"Half-day", mapQuery:"Museum of London Docklands"},
+  {id:"tate_britain_more", name:"Tate Britain", area:"Pimlico", kind:"Museums & Collections", tags:["indoor"], blurb:"British art across centuries—often less crowded than Tate Modern.", free:true, time:"1–2h", mapQuery:"Tate Britain"},
+  {id:"bank_england", name:"Bank of England Museum", area:"City of London", kind:"Museums & Collections", tags:["indoor","history"], blurb:"Money history + gold bar display—quick and interesting.", free:true, time:"1–2h", mapQuery:"Bank of England Museum"},
+  {id:"royal_academy", name:"Royal Academy of Arts", area:"Piccadilly", kind:"Museums & Collections", tags:["indoor","photo spots"], blurb:"Rotating exhibits—check what’s on.", free:false, time:"1–2h", mapQuery:"Royal Academy of Arts"},
+  {id:"design_museum_more", name:"Design Museum", area:"Kensington", kind:"Museums & Collections", tags:["indoor"], blurb:"Great for product/branding lovers—check current shows.", free:false, time:"1–2h", mapQuery:"Design Museum London"},
+  {id:"horniman", name:"Horniman Museum & Gardens", area:"Forest Hill", kind:"Museums & Collections", tags:["indoor","unusual"], blurb:"Quirky collections + gardens—nice half-day.", free:true, time:"Half-day", mapQuery:"Horniman Museum"},
+  {id:"dulwich_gallery", name:"Dulwich Picture Gallery", area:"Dulwich", kind:"Museums & Collections", tags:["indoor"], blurb:"Chill art museum in a leafy area.", free:false, time:"1–2h", mapQuery:"Dulwich Picture Gallery"},
+  {id:"maritime", name:"National Maritime Museum", area:"Greenwich", kind:"Museums & Collections", tags:["indoor","history"], blurb:"Maritime stories + great Greenwich pairing.", free:true, time:"Half-day", mapQuery:"National Maritime Museum"},
+  {id:"horniman_gardens", name:"Horniman Gardens", area:"Forest Hill", kind:"Parks & Gardens", tags:["walkable","views"], blurb:"Views + greenery—pair with museum.", free:true, time:"1–2h", mapQuery:"Horniman Gardens"},
+  {id:"leighton_house_more", name:"Leighton House Museum", area:"Kensington", kind:"Museums & Collections", tags:["indoor","photo spots"], blurb:"Insanely beautiful interiors—hidden gem.", free:false, time:"1–2h", mapQuery:"Leighton House Museum"},
+
+  // ---------------------------
+  // PARKS & GARDENS (MORE)
+  // ---------------------------
+  {id:"kensington_gardens_more", name:"Kensington Gardens", area:"Kensington", kind:"Parks & Gardens", tags:["walkable","photo spots"], blurb:"Pair with Hyde Park + museums.", free:true, time:"Half-day", mapQuery:"Kensington Gardens"},
+  {id:"hyde_park_more", name:"Hyde Park", area:"Hyde Park", kind:"Parks & Gardens", tags:["walkable"], blurb:"Classic London park—great reset day.", free:true, time:"Half-day", mapQuery:"Hyde Park"},
+  {id:"regents_park_more", name:"Regent’s Park", area:"Regent’s Park", kind:"Parks & Gardens", tags:["walkable","photo spots"], blurb:"Beautiful gardens + long strolling paths.", free:true, time:"Half-day", mapQuery:"Regent's Park"},
+  {id:"st_james_more", name:"St James’s Park", area:"Westminster", kind:"Parks & Gardens", tags:["walkable","photo spots"], blurb:"Most ‘royal’ park—great between big landmarks.", free:true, time:"1–2h", mapQuery:"St James's Park"},
+  {id:"green_park", name:"Green Park", area:"Mayfair", kind:"Parks & Gardens", tags:["walkable"], blurb:"Leafy shortcut between Buckingham area and Piccadilly.", free:true, time:"Quick", mapQuery:"Green Park London"},
+  {id:"victoria_embankment", name:"Victoria Embankment Gardens", area:"Embankment", kind:"Parks & Gardens", tags:["walkable","photo spots"], blurb:"Quick riverside greenery + pretty details.", free:true, time:"Quick", mapQuery:"Victoria Embankment Gardens"},
+  {id:"kyoto_garden", name:"Kyoto Garden (Holland Park)", area:"Kensington", kind:"Parks & Gardens", tags:["photo spots","walkable"], blurb:"Japanese garden oasis—super pretty and calm.", free:true, time:"1–2h", mapQuery:"Kyoto Garden Holland Park"},
+  {id:"holland_park", name:"Holland Park", area:"Kensington", kind:"Parks & Gardens", tags:["walkable","photo spots"], blurb:"Peacocks + gardens + calm trails.", free:true, time:"1–2h", mapQuery:"Holland Park"},
+  {id:"battersea_park", name:"Battersea Park", area:"Battersea", kind:"Parks & Gardens", tags:["walkable"], blurb:"Big park by the river—great for an easy afternoon.", free:true, time:"Half-day", mapQuery:"Battersea Park"},
+  {id:"richmond_park_more", name:"Richmond Park (deer spotting)", area:"Richmond", kind:"Parks & Gardens", tags:["walkable","views"], blurb:"Massive park that feels like countryside.", free:true, time:"Half-day", mapQuery:"Richmond Park"},
+  {id:"clapham_common", name:"Clapham Common", area:"Clapham", kind:"Parks & Gardens", tags:["walkable"], blurb:"Local London park energy + cafes nearby.", free:true, time:"1–2h", mapQuery:"Clapham Common"},
+  {id:"victoria_park", name:"Victoria Park", area:"Hackney", kind:"Parks & Gardens", tags:["walkable"], blurb:"Big east London park—great weekend vibe.", free:true, time:"Half-day", mapQuery:"Victoria Park London"},
+  {id:"regents_canal_more", name:"Regent’s Canal (Camden stretch)", area:"Camden", kind:"Walks", tags:["walkable","photo spots"], blurb:"Canal stroll between markets and quieter paths.", free:true, time:"1–2h", mapQuery:"Regent's Canal Camden"},
+  {id:"little_venice_more", name:"Little Venice", area:"Paddington", kind:"Walks", tags:["walkable","photo spots"], blurb:"Canal boats + cafes + peaceful stroll.", free:true, time:"1–2h", mapQuery:"Little Venice"},
+
+  // ---------------------------
+  // VIEWS (MORE)
+  // ---------------------------
+  {id:"parliament_hill_more", name:"Parliament Hill (Hampstead Heath)", area:"Hampstead", kind:"Views & Landmarks", tags:["views","walkable","photo spots"], blurb:"Top free skyline viewpoint.", free:true, time:"Half-day", mapQuery:"Parliament Hill"},
+  {id:"primrose_more", name:"Primrose Hill", area:"Primrose Hill", kind:"Views & Landmarks", tags:["views","walkable","photo spots"], blurb:"Short climb, big skyline payoff. Sunset is elite.", free:true, time:"1–2h", mapQuery:"Primrose Hill"},
+  {id:"alex_palace_more", name:"Alexandra Palace viewpoint", area:"Alexandra Palace", kind:"Views & Landmarks", tags:["views","photo spots"], blurb:"Huge panoramic skyline—great chill half-day.", free:true, time:"Half-day", mapQuery:"Alexandra Palace viewpoint"},
+  {id:"greenwich_view", name:"Greenwich Park viewpoint", area:"Greenwich", kind:"Views & Landmarks", tags:["views","walkable","photo spots"], blurb:"Canary Wharf skyline + river bends.", free:true, time:"1–2h", mapQuery:"Greenwich Park viewpoint"},
+  {id:"waterloo_bridge_more", name:"Waterloo Bridge (sunset)", area:"South Bank", kind:"Views & Landmarks", tags:["views","photo spots","walkable"], blurb:"One of the best bridge views in London.", free:true, time:"Quick", mapQuery:"Waterloo Bridge"},
+  {id:"sky_garden_more", name:"Sky Garden", area:"City of London", kind:"Views & Landmarks", tags:["views","indoor","photo spots"], blurb:"Free indoor viewpoint—book ahead.", free:true, time:"1–2h", mapQuery:"Sky Garden"},
+  {id:"one_new_change_more", name:"One New Change Rooftop", area:"City of London", kind:"Views & Landmarks", tags:["views","photo spots"], blurb:"Free St Paul’s dome view—quick win.", free:true, time:"Quick", mapQuery:"One New Change rooftop"},
+  {id:"horizon22_more", name:"Horizon 22", area:"City of London", kind:"Views & Landmarks", tags:["views","indoor","photo spots"], blurb:"Free viewpoint when slots are available.", free:true, time:"1–2h", mapQuery:"Horizon 22 London"},
+  {id:"shard_more", name:"The View from The Shard", area:"London Bridge", kind:"Views & Landmarks", tags:["views","photo spots"], blurb:"Paid viewpoint—amazing at sunset/night.", free:false, time:"1–2h", mapQuery:"View from The Shard"},
+  {id:"london_eye_more", name:"London Eye", area:"South Bank", kind:"Views & Landmarks", tags:["views","photo spots"], blurb:"Touristy but fun if it’s your first time.", free:false, time:"1–2h", mapQuery:"London Eye"},
+  {id:"st_pauls_angles", name:"St Paul’s angles (Millennium Bridge + riverside)", area:"City of London", kind:"Views & Landmarks", tags:["views","photo spots","walkable"], blurb:"Walk around for the best dome shots.", free:true, time:"1–2h", mapQuery:"St Paul's Cathedral"},
+  {id:"tower_bridge_more", name:"Tower Bridge", area:"Tower Hill", kind:"Views & Landmarks", tags:["views","photo spots","history"], blurb:"Iconic photos both sides of the river.", free:true, time:"1–2h", mapQuery:"Tower Bridge"},
+  {id:"southbank_more", name:"South Bank Walk (Waterloo → London Bridge)", area:"South Bank", kind:"Walks", tags:["views","walkable","photo spots"], blurb:"Best skyline walk—snacks + sights nonstop.", free:true, time:"Half-day", mapQuery:"South Bank London"},
+  {id:"primrose_sunset", name:"Primrose Hill (sunset picnic)", area:"Primrose Hill", kind:"Views & Landmarks", tags:["views","photo spots"], blurb:"Bring snacks and watch the city glow.", free:true, time:"1–2h", mapQuery:"Primrose Hill sunset"},
+  {id:"richmond_hill_more", name:"Richmond Hill View", area:"Richmond", kind:"Views & Landmarks", tags:["views","photo spots"], blurb:"Pretty river views + village vibe.", free:true, time:"1–2h", mapQuery:"Richmond Hill viewpoint"},
+
+  // ---------------------------
+  // WALKABLE NEIGHBORHOODS / STREETS (MORE)
+  // ---------------------------
+  {id:"soho_more", name:"Soho wander + Carnaby Street", area:"Soho", kind:"Walks", tags:["walkable","photo spots"], blurb:"Neon, shops, people-watching—best at night.", free:true, time:"Half-day", mapQuery:"Carnaby Street"},
+  {id:"shoreditch_more", name:"Shoreditch street art loop", area:"Shoreditch", kind:"Street Art & Hidden Finds", tags:["walkable","photo spots"], blurb:"Graffiti + indie shops + coffee stops.", free:true, time:"Half-day", mapQuery:"Shoreditch street art"},
+  {id:"covent_more", name:"Covent Garden", area:"Covent Garden", kind:"Walks", tags:["walkable","photo spots"], blurb:"Street performers + shops + piazza energy.", free:true, time:"1–2h", mapQuery:"Covent Garden"},
+  {id:"notting_more", name:"Notting Hill stroll", area:"Notting Hill", kind:"Walks", tags:["walkable","photo spots"], blurb:"Pastel houses + cute corners—great for photos.", free:true, time:"Half-day", mapQuery:"Notting Hill London"},
+  {id:"marylebone_more", name:"Marylebone High Street", area:"Marylebone", kind:"Walks", tags:["walkable"], blurb:"Chic neighborhood with cafés + boutiques.", free:true, time:"1–2h", mapQuery:"Marylebone High Street"},
+  {id:"kings_cross_more", name:"King’s Cross & Coal Drops Yard", area:"King’s Cross", kind:"Walks", tags:["walkable","photo spots"], blurb:"Modern design shopping + canalside stroll.", free:true, time:"1–2h", mapQuery:"Coal Drops Yard"},
+  {id:"shoreditch_boxpark", name:"Boxpark Shoreditch", area:"Shoreditch", kind:"Games & Experiences", tags:["food","walkable"], blurb:"Container mall vibe—quick browse + bites.", free:true, time:"1–2h", mapQuery:"Boxpark Shoreditch"},
+  {id:"leicester_sq", name:"Leicester Square", area:"West End", kind:"Walks", tags:["walkable"], blurb:"Touristy but central—easy link between stops.", free:true, time:"Quick", mapQuery:"Leicester Square"},
+  {id:"piccadilly", name:"Piccadilly Circus", area:"West End", kind:"Views & Landmarks", tags:["walkable","photo spots"], blurb:"Classic neon London moment.", free:true, time:"Quick", mapQuery:"Piccadilly Circus"},
+  {id:"trafalgar_more", name:"Trafalgar Square", area:"Trafalgar Square", kind:"Views & Landmarks", tags:["walkable","photo spots"], blurb:"Central landmark—pair with National Gallery.", free:true, time:"Quick", mapQuery:"Trafalgar Square"},
+  {id:"south_kens_more", name:"South Kensington museum quarter", area:"South Kensington", kind:"Walks", tags:["walkable","indoor"], blurb:"V&A + Natural History + Science Museum in one zone.", free:true, time:"Half-day", mapQuery:"South Kensington museums"},
+  {id:"paddington_basin", name:"Paddington Basin canalside", area:"Paddington", kind:"Walks", tags:["walkable","photo spots"], blurb:"Modern canalside walk with cafés + bridges.", free:true, time:"1–2h", mapQuery:"Paddington Basin"},
+  {id:"london_fields", name:"London Fields + Broadway Market area", area:"Hackney", kind:"Walks", tags:["walkable"], blurb:"East London weekend vibe—great for a casual loop.", free:true, time:"Half-day", mapQuery:"London Fields"},
+  {id:"shoreditch_high_st", name:"Shoreditch High Street stroll", area:"Shoreditch", kind:"Walks", tags:["walkable"], blurb:"Vintage shops + coffee + street art side streets.", free:true, time:"Half-day", mapQuery:"Shoreditch High Street"},
+  {id:"chinatown_walk", name:"Chinatown wander", area:"Chinatown", kind:"Walks", tags:["walkable","food","photo spots"], blurb:"Lantern streets + snack stops—especially at night.", free:true, time:"1–2h", mapQuery:"Chinatown London"},
+
+  // ---------------------------
+  // HISTORY / ICONIC LANDMARKS (MORE)
+  // ---------------------------
+  {id:"buckingham_more", name:"Buckingham Palace (front gates)", area:"Westminster", kind:"Views & Landmarks", tags:["history","photo spots","walkable"], blurb:"Quick iconic stop—pair with St James’s Park.", free:true, time:"Quick", mapQuery:"Buckingham Palace"},
+  {id:"big_ben_more", name:"Big Ben + Parliament", area:"Westminster", kind:"Views & Landmarks", tags:["history","photo spots","walkable"], blurb:"Iconic London—best angles from Westminster Bridge.", free:true, time:"Quick", mapQuery:"Big Ben"},
+  {id:"westminster_bridge", name:"Westminster Bridge", area:"Westminster", kind:"Views & Landmarks", tags:["views","photo spots","walkable"], blurb:"Great skyline shots (Eye + Big Ben).", free:true, time:"Quick", mapQuery:"Westminster Bridge"},
+  {id:"st_pauls_more", name:"St Paul’s Cathedral area", area:"City of London", kind:"Views & Landmarks", tags:["history","photo spots"], blurb:"Even outside, the dome views are elite.", free:true, time:"1–2h", mapQuery:"St Paul's Cathedral"},
+  {id:"millennium_more", name:"Millennium Bridge", area:"City of London", kind:"Architecture & Streets", tags:["photo spots","walkable","views"], blurb:"Best St Paul’s framing to Tate Modern.", free:true, time:"Quick", mapQuery:"Millennium Bridge"},
+  {id:"tower_london_more", name:"Tower of London (exterior + riverwalk)", area:"Tower Hill", kind:"History & Ruins", tags:["history","walkable"], blurb:"Iconic fortress vibe along the Thames.", free:true, time:"1–2h", mapQuery:"Tower of London"},
+  {id:"kensington_palace", name:"Kensington Palace (grounds)", area:"Kensington", kind:"History & Ruins", tags:["history","walkable","photo spots"], blurb:"Royal park area—nice pairing with gardens.", free:true, time:"1–2h", mapQuery:"Kensington Palace"},
+  {id:"royal_mews", name:"Royal Mews (check entry)", area:"Westminster", kind:"History & Ruins", tags:["history"], blurb:"Royal carriages + horses—if you like royal details.", free:false, time:"1–2h", mapQuery:"Royal Mews London"},
+  {id:"monument_more", name:"The Monument (Great Fire)", area:"City of London", kind:"Views & Landmarks", tags:["history","views"], blurb:"Historic marker—climb for views (paid).", free:false, time:"1–2h", mapQuery:"The Monument London"},
+  {id:"temple_church_more", name:"Temple Church", area:"Temple", kind:"History & Ruins", tags:["history","indoor"], blurb:"Knights Templar vibes + calm interior.", free:false, time:"Quick", mapQuery:"Temple Church London"},
+  {id:"inns_more", name:"Inns of Court (Inner & Middle Temple)", area:"Temple", kind:"Architecture & Streets", tags:["history","walkable","photo spots"], blurb:"Hidden courtyards + peaceful lanes.", free:true, time:"1–2h", mapQuery:"Inner Temple London"},
+  {id:"charterhouse_more", name:"The Charterhouse", area:"Farringdon", kind:"History & Ruins", tags:["history","unusual"], blurb:"Hidden historic complex—check tour times.", free:false, time:"1–2h", mapQuery:"The Charterhouse London"},
+  {id:"old_op_theatre", name:"Old Operating Theatre Museum", area:"London Bridge", kind:"Museums & Collections", tags:["history","unusual","indoor"], blurb:"Historic surgery theatre—if you can handle the cringe.", free:false, time:"1–2h", mapQuery:"Old Operating Theatre Museum"},
+  {id:"cutty_sark_more", name:"Cutty Sark", area:"Greenwich", kind:"Museums & Collections", tags:["history","indoor"], blurb:"Historic ship—Greenwich day-trip staple.", free:false, time:"1–2h", mapQuery:"Cutty Sark"},
+  {id:"greenwich_more", name:"Greenwich Park + Meridian area", area:"Greenwich", kind:"Parks & Gardens", tags:["history","views","walkable"], blurb:"One of the best full-day neighborhood loops.", free:true, time:"Half-day", mapQuery:"Greenwich Park"},
 ];
 
 // ---- configuration / derived data ----
